@@ -3,7 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CriteriaContextViewer", "CriteriaContextViewer\CriteriaContextViewer.csproj", "{539E835A-45BE-49E9-8679-3A130CC300DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CriteriaContextViewer.Model", "CriteriaContextViewer.Model\CriteriaContextViewer.Model.csproj", "{E546A19B-D87C-4E51-8F30-E6D896D3461B}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{539E835A-45BE-49E9-8679-3A130CC300DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{539E835A-45BE-49E9-8679-3A130CC300DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{539E835A-45BE-49E9-8679-3A130CC300DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{539E835A-45BE-49E9-8679-3A130CC300DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E546A19B-D87C-4E51-8F30-E6D896D3461B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E546A19B-D87C-4E51-8F30-E6D896D3461B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E546A19B-D87C-4E51-8F30-E6D896D3461B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E546A19B-D87C-4E51-8F30-E6D896D3461B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
