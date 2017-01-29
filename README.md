@@ -7,3 +7,5 @@ A program ment to more easily inspect systems using the criteria system. (Achiev
 - ~~Quests~~
 
 Support for inspecting criterias themselves is currently not available, but will be featured in a future version (main goal of project)
+
+Supported wow rev: **23360**
