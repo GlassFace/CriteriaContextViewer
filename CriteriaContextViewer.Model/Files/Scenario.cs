@@ -25,6 +25,10 @@ namespace CriteriaContextViewer.Model.Files
             Steps = new List<ScenarioStep>();
         }
 
+        public string Value => Id.ToString();
+
+        public string Display => $"{Id} - {Name}";
+
         public void ReadObject(IWowClientDBReader dbReader, BinaryReader reader)
         {
             using (BinaryReader br = reader)
@@ -69,15 +73,15 @@ namespace CriteriaContextViewer.Model.Files
     [Flags]
     public enum ScenarioFlags : byte
     {
-        [Description("Unknown 1")]
-        Unknown1        = 0x1,
-        [Description("Unknown 2")]
-        Unknown2        = 0x2,
-        [Description("Unknown 3")]
-        Unknown3        = 0x4,
-        [Description("Unknown 4")]
-        Unknown4        = 0x8,
-        [Description("Unknown 5")]
-        Unknown5        = 0x10,
+        [Description("Unknown 1 (0x0001)")]
+        Unknown1        = 0x0001,
+        [Description("Unknown 2 (0x0002)")]
+        Unknown2        = 0x0002,
+        [Description("Unknown 3 (0x0004)")]
+        Unknown3        = 0x0004,
+        [Description("Unknown 4 (0x0008)")]
+        Unknown4        = 0x0008,
+        [Description("Unknown 5 (0x0010)")]
+        Unknown5        = 0x0010,
     }
 }

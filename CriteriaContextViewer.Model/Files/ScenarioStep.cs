@@ -27,6 +27,10 @@ namespace CriteriaContextViewer.Model.Files
         public ScenarioStepFlag Flags { get; set; }
         public int BonusObjectiveRequiredStepId { get; set; }
         public ScenarioStep BonusObjectiveRequiredStep { get; set; }
+
+        public string Value => Id.ToString();
+        public string Display => $"{Id} - {Name}";
+
         public void ReadObject(IWowClientDBReader dbReader, BinaryReader reader)
         {
             using (BinaryReader br = reader)
@@ -69,6 +73,7 @@ namespace CriteriaContextViewer.Model.Files
         }
     }
 
+    [Flags]
     public enum ScenarioStepFlag : byte
     {
         [Description("Bonus Objective")]
