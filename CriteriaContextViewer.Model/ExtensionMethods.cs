@@ -10,16 +10,13 @@ namespace CriteriaContextViewer.Model
 {
     public static class ExtensionMethods
     {
-        public static bool NotYetImplemented(this Enum value)
+        public static bool NotYetImplemented<T>(this T value) where T : struct, IConvertible
         {
-            IEnumerable<NYIAttribute> attributes =
-                Enum.GetValues(typeof(NYIAttribute))
-                    .Cast<Enum>()
-                    .Where(value.HasFlag)
-                    .Select(v => typeof(NYIAttribute).GetField(v.ToString()))
-                    .SelectMany(f => f.GetCustomAttributes(typeof(NYIAttribute), false))
-                    .Cast<NYIAttribute>();
-            return attributes.Any();
+            if (!typeof(T).IsEnum)
+                return true;
+
+            return true;
+            return typeof(T).GetField(value.ToString()).IsDefined(typeof(NYIAttribute), false);
         }
 
         public static string GetDescription(this Enum value)

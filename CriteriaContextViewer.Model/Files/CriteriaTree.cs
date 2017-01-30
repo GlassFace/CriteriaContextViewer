@@ -30,6 +30,37 @@ namespace CriteriaContextViewer.Model.Files
             Children = new List<CriteriaTree>();
         }
 
+        public override string ToString()
+        {
+            switch (Operator)
+            {
+                case CriteriaTreeOperator.Single:
+                    if (Parent.Operator == CriteriaTreeOperator.SumChildrenWeight)
+                        return $"CT {Id} - Increase parent criteria tree progress by {Amount}";
+                    return $"CT {Id} - The following criteria is met" + (Amount > 1 ? $" {Amount} times" : "");
+                case CriteriaTreeOperator.SingleNotCompleted:
+                    return $"CT {Id} - The following criteria is not met";
+                case CriteriaTreeOperator.All:
+                    return $"CT {Id} - All of the following criterias are met";
+                case CriteriaTreeOperator.SumChildren:
+                    return $"CT {Id} - The following criterias are met at least {Amount} time" + (Amount > 1 ? "s" : "");
+                case CriteriaTreeOperator.MaxChild:
+                    return $"CT {Id} - Any of the following criterias are met at least {Amount} time" + (Amount > 1 ? "s" : "");
+                case CriteriaTreeOperator.CountDirectChildren:
+                    return $"CT {Id} - At least {Amount} of the following criterias are met at least once";
+                case CriteriaTreeOperator.Any:
+                    return $"CT {Id} - At least {Amount} criteria" + (Amount > 1 ? "s" : "") + " are met";
+                case CriteriaTreeOperator.SumChildrenWeight:
+                    return $"CT {Id} - Criteria tree progress is more than {Amount}";
+            }
+
+            string description = $"CT {Id}";
+            if (!string.IsNullOrEmpty(Description))
+                description = $"{description} - {Description}";
+
+            return description;
+        }
+
         public void ReadObject(IWowClientDBReader dbReader, BinaryReader reader)
         {
             using (BinaryReader br = reader)

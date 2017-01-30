@@ -25,7 +25,48 @@ namespace CriteriaContextViewer.Model.Files
         public CriteriaCondition FailEvent { get; set; }
         public byte Flags { get; set; }
         public byte EligibilityWorldStateValue { get; set; }
-        
+
+        public override string ToString()
+        {
+            string text = "";
+            switch (Type)
+            {
+                case CriteriaType.KillCreature:
+                    text = $"Kill creature with entry \"{Asset}\"";
+                    break;
+                case CriteriaType.ManuallyGivenCriteria:
+                    text = $"Get manually granted the criteria (id: {Id})";
+                    break;
+                case CriteriaType.BeSpellTarget:
+                    text = $"Be target of spell (id: {Asset})";
+                    break;
+                case CriteriaType.CastSpell:
+                    text = $"Cast spell (id: {Asset})";
+                    break;
+                case CriteriaType.DefeatCreatureGroup:
+                    text = $"Defeat creature group (id: {Asset})";
+                    break;
+                case CriteriaType.SendScenarioEvent:
+                    text = $"Scenario event \"{Asset}\" is sent";
+                    break;
+                case CriteriaType.CastSpell2:
+                    text = $"Hit a target with spell (id: {Asset})";
+                    break;
+                default:
+                    break;
+            }
+
+            if (string.IsNullOrEmpty(text))
+                text = (!Enum.IsDefined(typeof(CriteriaType), Type)
+                    ? $" - (Unknown criteria type \"{Type}\")"
+                    : $" - Unspecified criteria type \"{Enum.GetName(typeof(CriteriaType), Type)}\", data: {Asset}");
+
+            string stringAddition = Type.NotYetImplemented() ? $"(NYI criteria type id: {(int)Type})" : "";
+            text = $"C {Id} - {stringAddition} {text}";
+
+            return text;
+        }
+
         public void ReadObject(IWowClientDBReader dbReader, BinaryReader binaryReader)
         {
             using (BinaryReader br = binaryReader)

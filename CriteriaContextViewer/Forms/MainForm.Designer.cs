@@ -41,7 +41,6 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.textBoxScenarioStepQuestRewardId = new System.Windows.Forms.TextBox();
             this.linkLabelScenarioStepQuestReward = new System.Windows.Forms.LinkLabel();
-            this.buttonInspectCriterias = new System.Windows.Forms.Button();
             this.textBoxScenarioStepDescription = new System.Windows.Forms.TextBox();
             this.labelScenarioStepDescription = new System.Windows.Forms.Label();
             this.listBoxScenarioSteps = new System.Windows.Forms.ListBox();
@@ -65,6 +64,8 @@
             this.labelScenarioId = new System.Windows.Forms.Label();
             this.labelScenarioName = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.treeViewScenarioStepCriteriaTrees = new System.Windows.Forms.TreeView();
+            this.label4 = new System.Windows.Forms.Label();
             this.scenarios.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -79,7 +80,7 @@
             this.scenarios.Location = new System.Drawing.Point(4, 22);
             this.scenarios.Name = "scenarios";
             this.scenarios.Padding = new System.Windows.Forms.Padding(3);
-            this.scenarios.Size = new System.Drawing.Size(793, 520);
+            this.scenarios.Size = new System.Drawing.Size(1193, 520);
             this.scenarios.TabIndex = 1;
             this.scenarios.Text = "Scenarios";
             this.scenarios.UseVisualStyleBackColor = true;
@@ -87,8 +88,8 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.03177F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 74.96823F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.36795F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 82.63205F));
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.panel2, 1, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -97,7 +98,7 @@
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 514F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(787, 514);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1187, 514);
             this.tableLayoutPanel1.TabIndex = 0;
             this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint);
             // 
@@ -178,19 +179,22 @@
             // 
             // listBoxScenarios
             // 
+            this.listBoxScenarios.DisplayMember = "Display";
             this.listBoxScenarios.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listBoxScenarios.FormattingEnabled = true;
             this.listBoxScenarios.Location = new System.Drawing.Point(3, 134);
             this.listBoxScenarios.Name = "listBoxScenarios";
             this.listBoxScenarios.Size = new System.Drawing.Size(185, 371);
             this.listBoxScenarios.TabIndex = 2;
+            this.listBoxScenarios.ValueMember = "Value";
             this.listBoxScenarios.SelectedValueChanged += new System.EventHandler(this.listBox1_SelectedValueChanged);
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.label4);
+            this.panel2.Controls.Add(this.treeViewScenarioStepCriteriaTrees);
             this.panel2.Controls.Add(this.textBoxScenarioStepQuestRewardId);
             this.panel2.Controls.Add(this.linkLabelScenarioStepQuestReward);
-            this.panel2.Controls.Add(this.buttonInspectCriterias);
             this.panel2.Controls.Add(this.textBoxScenarioStepDescription);
             this.panel2.Controls.Add(this.labelScenarioStepDescription);
             this.panel2.Controls.Add(this.listBoxScenarioSteps);
@@ -214,9 +218,9 @@
             this.panel2.Controls.Add(this.labelScenarioId);
             this.panel2.Controls.Add(this.labelScenarioName);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(200, 3);
+            this.panel2.Location = new System.Drawing.Point(209, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(584, 508);
+            this.panel2.Size = new System.Drawing.Size(975, 508);
             this.panel2.TabIndex = 1;
             // 
             // textBoxScenarioStepQuestRewardId
@@ -237,16 +241,6 @@
             this.linkLabelScenarioStepQuestReward.Text = "Wowhead";
             this.linkLabelScenarioStepQuestReward.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.linkLabelScenarioStepQuestReward.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelScenarioStepQuestReward_LinkClicked);
-            // 
-            // buttonInspectCriterias
-            // 
-            this.buttonInspectCriterias.Location = new System.Drawing.Point(267, 314);
-            this.buttonInspectCriterias.Name = "buttonInspectCriterias";
-            this.buttonInspectCriterias.Size = new System.Drawing.Size(307, 23);
-            this.buttonInspectCriterias.TabIndex = 30;
-            this.buttonInspectCriterias.Text = "Inspect criterias";
-            this.buttonInspectCriterias.UseVisualStyleBackColor = true;
-            this.buttonInspectCriterias.Click += new System.EventHandler(this.buttonInspectCriterias_Click);
             // 
             // textBoxScenarioStepDescription
             // 
@@ -269,11 +263,13 @@
             // 
             // listBoxScenarioSteps
             // 
+            this.listBoxScenarioSteps.DisplayMember = "Display";
             this.listBoxScenarioSteps.FormattingEnabled = true;
             this.listBoxScenarioSteps.Location = new System.Drawing.Point(28, 314);
             this.listBoxScenarioSteps.Name = "listBoxScenarioSteps";
             this.listBoxScenarioSteps.Size = new System.Drawing.Size(216, 173);
             this.listBoxScenarioSteps.TabIndex = 27;
+            this.listBoxScenarioSteps.ValueMember = "Value";
             this.listBoxScenarioSteps.SelectedValueChanged += new System.EventHandler(this.listBoxScenarioSteps_SelectedValueChanged);
             // 
             // checkBoxScenarioStepBonusObjective
@@ -461,15 +457,32 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(801, 546);
+            this.tabControl1.Size = new System.Drawing.Size(1201, 546);
             this.tabControl1.TabIndex = 1;
             this.tabControl1.Enter += new System.EventHandler(this.tabControl1_Enter);
+            // 
+            // treeViewScenarioStepCriteriaTrees
+            // 
+            this.treeViewScenarioStepCriteriaTrees.Location = new System.Drawing.Point(587, 43);
+            this.treeViewScenarioStepCriteriaTrees.Name = "treeViewScenarioStepCriteriaTrees";
+            this.treeViewScenarioStepCriteriaTrees.Size = new System.Drawing.Size(367, 444);
+            this.treeViewScenarioStepCriteriaTrees.TabIndex = 33;
+            // 
+            // label4
+            // 
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(583, 10);
+            this.label4.Margin = new System.Windows.Forms.Padding(10);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(234, 20);
+            this.label4.TabIndex = 34;
+            this.label4.Text = "Criterias";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(801, 546);
+            this.ClientSize = new System.Drawing.Size(1201, 546);
             this.Controls.Add(this.tabControl1);
             this.Name = "MainForm";
             this.Text = "MainForm";
@@ -520,8 +533,9 @@
         private System.Windows.Forms.Label labelScenarioId;
         private System.Windows.Forms.Label labelScenarioName;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.Button buttonInspectCriterias;
         private System.Windows.Forms.LinkLabel linkLabelScenarioStepQuestReward;
         private System.Windows.Forms.TextBox textBoxScenarioStepQuestRewardId;
+        private System.Windows.Forms.TreeView treeViewScenarioStepCriteriaTrees;
+        private System.Windows.Forms.Label label4;
     }
 }

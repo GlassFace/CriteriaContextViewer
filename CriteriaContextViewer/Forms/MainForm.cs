@@ -98,8 +98,6 @@ namespace CriteriaContextViewer.Forms
             }
 
             IList<T> objects = new List<T>();
-            int totalRows = dbReader.Rows.Count();
-            int currentRow = 0;
             foreach (var row in dbReader.Rows)
             {
                 T t = new T();
@@ -219,15 +217,7 @@ namespace CriteriaContextViewer.Forms
         private void tabControl1_Enter(object sender, EventArgs e)
         {
             LoadScenarios();
-
-            listBoxScenarios.ValueMember = "Value";
-            listBoxScenarios.DisplayMember = "Display";
             listBoxScenarios.DataSource = Scenarios.Select(scenario => scenario.Value).ToList();
-
-            //backgroundWorker1.DoWork += (o, args) => LoadScenarios();
-            //LoadingForm form = new LoadingForm("Loading scenario data", backgroundWorker1);
-            //form.Show();
-            //backgroundWorker1.RunWorkerAsync();
         }
 
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
@@ -244,13 +234,12 @@ namespace CriteriaContextViewer.Forms
             labelScenarioName.Text = scenario.Name;
             textBoxScenarioId.Text = scenario.Id.ToString();
             textBoxScenarioType.Text = $"{(int) scenario.Type} - {scenario.Type.GetDescription()}";
+            textBoxScenarioData.Text = scenario.Data.ToString();
             listBoxScenarioFlags.DataSource =
                 Enum.GetValues(typeof(ScenarioFlags))
                     .Cast<ScenarioFlags>()
                     .Where(flag => scenario.Flags.HasFlag(flag))
                     .Select(flag => flag.GetDescription()).ToList();
-            listBoxScenarioSteps.ValueMember = "Value";
-            listBoxScenarioSteps.DisplayMember = "Display";
             listBoxScenarioSteps.DataSource = scenario.Steps;
         }
 
@@ -258,6 +247,9 @@ namespace CriteriaContextViewer.Forms
         {
             CheckBox checkbox = (CheckBox) sender;
             if (checkbox == null)
+                return;
+
+            if (textBoxScenarioStepRequiredStepId.Text == "0" || string.IsNullOrEmpty(textBoxScenarioStepRequiredStepId.Text))
                 return;
 
             labelScenarioStepRequiredStepId.Visible = checkbox.Checked;
@@ -276,7 +268,50 @@ namespace CriteriaContextViewer.Forms
             textBoxScenarioStepIndex.Text = step.StepIndex.ToString();
             textBoxScenarioStepQuestRewardId.Text = step.QuestRewardId.ToString();
             linkLabelScenarioStepQuestReward.Visible = !(textBoxScenarioStepQuestRewardId.Text == "0" || string.IsNullOrEmpty(textBoxScenarioStepQuestRewardId.Text));
+            textBoxScenarioStepRequiredStepId.Text = step.BonusObjectiveRequiredStepId.ToString();
             checkBoxScenarioStepBonusObjective.Checked = (step.Flags & ScenarioStepFlag.BonusObjective) != 0;
+            treeViewScenarioStepCriteriaTrees.Nodes.Clear();
+            TreeNode node = GetCriteriaTreeNodesFromScenarioStep(step);
+            if (node != null)
+            {
+                treeViewScenarioStepCriteriaTrees.Nodes.Add(node);
+                treeViewScenarioStepCriteriaTrees.ExpandAll();
+            }
+        }
+
+        private TreeNode GetCriteriaTreeNodesFromScenarioStep(ScenarioStep step)
+        {
+            CriteriaTree criteriaTree = step.CriteriaTree;
+            if (criteriaTree == null)
+                return null;
+            
+            TreeNode root = new TreeNode(criteriaTree.ToString());
+            GetCriteriaTreeChildrenTreeNodes(ref root, criteriaTree);
+            return root;
+        }
+
+        private void GetCriteriaTreeChildrenTreeNodes(ref TreeNode root, CriteriaTree criteriaTree)
+        {
+            if (criteriaTree.Criteria != null)
+            {
+                root.Nodes.Add(new TreeNode(criteriaTree.Criteria.ToString()));
+            }
+            else
+            {
+                foreach (var child in criteriaTree.Children)
+                {
+                    if ((child.Operator == CriteriaTreeOperator.Single && child.Parent != null && child.Parent.Operator == CriteriaTreeOperator.SumChildren) || (child.Operator == CriteriaTreeOperator.Single && child.Amount == 1 && criteriaTree.Operator != CriteriaTreeOperator.SumChildrenWeight))
+                    {
+                        root.Nodes.Add(new TreeNode(child.Criteria.ToString()));
+                    }
+                    else
+                    {
+                        TreeNode node = new TreeNode(child.ToString());
+                        GetCriteriaTreeChildrenTreeNodes(ref node, child);
+                        root.Nodes.Add(node);
+                    }
+                }
+            }
         }
 
         private void buttonSearchScenarios_Click(object sender, EventArgs e)
@@ -304,6 +339,7 @@ namespace CriteriaContextViewer.Forms
                                 scenario.Value.Id == scenarioId).Select(scenario => scenario.Value).ToList();
                     break;
                 case ScenarioSearchType.ByScenarioType:
+                {
                     int scenarioTypeId;
                     if (!int.TryParse(textBoxSearchScenarios.Text, out scenarioTypeId))
                     {
@@ -314,7 +350,7 @@ namespace CriteriaContextViewer.Forms
                     ScenarioType type = (ScenarioType) scenarioTypeId;
                     List<Scenario> scenarios = Scenarios.Where(
                         scenario =>
-                            scenario.Value.Type == type).Select(scenario => scenario.Value).ToList();
+                                scenario.Value.Type == type).Select(scenario => scenario.Value).ToList();
 
                     if (!scenarios.Any())
                     {
@@ -324,6 +360,8 @@ namespace CriteriaContextViewer.Forms
 
                     listBoxScenarios.DataSource = scenarios;
                     break;
+ 
+                }
                 case ScenarioSearchType.ByScenarioStepName:
                     listBoxScenarios.DataSource =
                         Scenarios.Where(
@@ -365,6 +403,17 @@ namespace CriteriaContextViewer.Forms
                             .Select(scenario => scenario.Value)
                             .ToList();
                     break;
+                case ScenarioSearchType.ByCriteriaTreeDescription:
+                    listBoxScenarios.DataSource =
+                        Scenarios.Where(
+                                scenario =>
+                                    scenario.Value.Steps.Where(step => step.CriteriaTree != null).Any(
+                                        step =>
+                                            step.CriteriaTree.Description.ToLower().Contains(textBoxSearchScenarios.Text.ToLower()) ||
+                                            CriteriaTreeHasChildCriteriaTreeDescription(step.CriteriaTree, textBoxSearchScenarios.Text)))
+                            .Select(scenario => scenario.Value)
+                            .ToList();
+                    break;
                 case ScenarioSearchType.UsesCriteriaId:
                     uint criteriaId;
                     if (!uint.TryParse(textBoxSearchScenarios.Text, out criteriaId))
@@ -380,6 +429,27 @@ namespace CriteriaContextViewer.Forms
                             .Select(scenario => scenario.Value)
                             .ToList();
                     break;
+                case ScenarioSearchType.UsesCriteriaType:
+                {
+                    int criteriaTypeId;
+                    if (!int.TryParse(textBoxSearchScenarios.Text, out criteriaTypeId))
+                    {
+                        listBoxScenarios.DataSource = SearchByCriteriaTypeDescription(textBoxSearchScenarios.Text);
+                        break;
+                    }
+
+                    CriteriaType type = (CriteriaType) criteriaTypeId;
+                    List<Scenario> scenarios = Scenarios.Where(scenario => scenario.Value.Steps.Where(step => step.CriteriaTree != null).Any(step => CriteriaTreeHasChildCriteriaType(step.CriteriaTree, type))).Select(scenario => scenario.Value).ToList();
+
+                    if (!scenarios.Any())
+                    {
+                        listBoxScenarios.DataSource = SearchByCriteriaTypeDescription(textBoxSearchScenarios.Text);
+                        break;
+                    }
+
+                    listBoxScenarios.DataSource = scenarios;
+                    break;
+                }
                 case ScenarioSearchType.HasBonusObjective:
                     listBoxScenarios.DataSource =
                         Scenarios.Where(
@@ -397,10 +467,22 @@ namespace CriteriaContextViewer.Forms
                    criteriaTree.Children.Any(child => CriteriaTreeHasChildCriteriaTreeId(child, criteriaTreeId));
         }
 
+        public bool CriteriaTreeHasChildCriteriaTreeDescription(CriteriaTree criteriaTree, string description)
+        {
+            return criteriaTree.Children.Any(child => child.Description.ToLower().Contains(description)) ||
+                   criteriaTree.Children.Any(child => CriteriaTreeHasChildCriteriaTreeDescription(child, description));
+        }
+
         public bool CriteriaTreeHasChildCriteriaId(CriteriaTree criteriaTree, uint criteriaId)
         {
             return criteriaTree.Children.Any(child => child.CriteriaId == criteriaId) ||
                    criteriaTree.Children.Any(child => CriteriaTreeHasChildCriteriaId(child, criteriaId));
+        }
+
+        public bool CriteriaTreeHasChildCriteriaType(CriteriaTree criteriaTree, CriteriaType type)
+        {
+            return (criteriaTree.Criteria != null && criteriaTree.Criteria.Type == type) ||
+                   criteriaTree.Children.Any(child => CriteriaTreeHasChildCriteriaType(child, type));
         }
 
         private List<Scenario> SearchByScenarioTypeDescription(string description)
@@ -423,6 +505,33 @@ namespace CriteriaContextViewer.Forms
                 Scenarios.Where(scenario => typesMatch.Contains(scenario.Value.Type))
                     .Select(scenario => scenario.Value)
                     .ToList();
+        }
+
+        private List<Scenario> SearchByCriteriaTypeDescription(string description)
+        {
+            Dictionary<CriteriaType, string> criteriaTypesWithDescriptions = new Dictionary<CriteriaType, string>();
+            Enum.GetValues(typeof(CriteriaType))
+                .Cast<CriteriaType>()
+                .Select(type => new KeyValuePair<CriteriaType, string>(type, type.GetDescription()))
+                .ToList()
+                .ForEach(pair => criteriaTypesWithDescriptions.Add(pair.Key, pair.Value));
+
+            List<CriteriaType> typesMatch =
+                criteriaTypesWithDescriptions.Where(
+                        typePair =>
+                            typePair.Value.ToLower(CultureInfo.InvariantCulture)
+                                .Contains(description.ToLower(CultureInfo.InvariantCulture)))
+                    .Select(typePair => typePair.Key)
+                    .ToList();
+            return
+                Scenarios.Where(scenario => scenario.Value.Steps.Where(step => step.CriteriaTree != null).Any(step => CriteriaTreeHasCriteriaWithType(step.CriteriaTree, typesMatch))).Select(scenario => scenario.Value)
+                    .ToList();
+        }
+
+        public bool CriteriaTreeHasCriteriaWithType(CriteriaTree tree, IEnumerable<CriteriaType> types)
+        {
+            return (tree.Criteria != null && types.Contains(tree.Criteria.Type)) ||
+                   tree.Children.Any(child => CriteriaTreeHasCriteriaWithType(child, types));
         }
 
         private void textBoxSearchScenarios_KeyDown(object sender, KeyEventArgs e)
@@ -477,8 +586,12 @@ namespace CriteriaContextViewer.Forms
         ByScenarioStepDescription,
         [Description("Step uses criteria tree id")]
         UsesCriteriaTreeId,
+        [Description("Scenario steps criteria trees description")]
+        ByCriteriaTreeDescription,
         [Description("Step uses criteria id")]
         UsesCriteriaId,
+        [Description("Step uses criteria type")]
+        UsesCriteriaType,
         [Description("Has bonus objectives")]
         HasBonusObjective,
     }

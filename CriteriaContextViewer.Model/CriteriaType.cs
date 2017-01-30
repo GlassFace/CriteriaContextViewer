@@ -8,13 +8,15 @@ namespace CriteriaContextViewer.Model
         KillCreature                        = 0,
         [Description("Win battleground")]
         WinBattleground                     = 1,
-        // 2
+        // 2 - 0 criterias
         [Description("Complete archeology projects")]
         CompleteArcheologyProjects          = 3,
-        // 4
+        [Description("Survey gameobject")]
+        SurveyGameobject                    = 4, // With "Luron" present only? http://www.wowhead.com/npc=103733/luron
         [Description("Reach level")]
         ReachLevel                          = 5,
-        // 6
+        [Description("Clear digsite")]
+        ClearDigsite                        = 6,
         [Description("Reach skill level")]
         ReachSkillLevel                     = 7,
         [Description("Complete achievement")]
@@ -43,8 +45,10 @@ namespace CriteriaContextViewer.Model
         CompleteRaid                        = 19,
         [Description("Killed by creature")]
         KilledByCreature                    = 20,
-        // 21
-        // 22
+        [Description("Granted criteria")]
+        ManuallyGivenCriteria               = 21,
+        [Description("Guild - Complete challenge mode")]
+        GuildCompleteChallengeMode          = 22,
         [Description("Killed by players")]
         KilledByPlayer                      = 23,
         [Description("Fall without dying")]
@@ -113,7 +117,7 @@ namespace CriteriaContextViewer.Model
         GetKillingBlows                     = 56,
         [Description("Equip item")]
         EquipItem                           = 57,
-        // 58
+        // 58 - 0 criterias
         [Description("Money from vendors")]
         MoneyFromVendors                    = 59,
         [Description("Gold spent for talents")]
@@ -124,7 +128,9 @@ namespace CriteriaContextViewer.Model
         MoneyFromQuestReward                = 62,
         [Description("Gold spent on traveling")]
         GoldSpentOnTraveling                = 63,
-        // 64
+        [NYI]
+        [Description("Defeat creature group")]
+        DefeatCreatureGroup                 = 64,
         [Description("Gold spent at barber")]
         GoldSpentAtBarber                   = 65,
         [Description("Gold spent on mailing")]
@@ -137,10 +143,12 @@ namespace CriteriaContextViewer.Model
         BeSpellTarget2                      = 69,
         [Description("Special PVP kill")]
         SpecialPvpKill                      = 70,
-        // 71
+        [Description("Complete challenge mode")]
+        CompleteChallengeMode               = 71,
         [Description("Fish in gameobject")]
         FishInGameobject                    = 72,
-        // 73
+        [Description("Complete gossip event")]
+        CompleteGossipEvent                 = 73,
         [Description("On login")]
         OnLogin                             = 74,
         [Description("Learn skill line spells")]
@@ -151,10 +159,12 @@ namespace CriteriaContextViewer.Model
         LoseDuel                            = 77,
         [Description("Kill creature of type")]
         KillCreatureType                    = 78,
-        // 79
+        [Description("Guild - Cook recipes")]
+        GuildCookRecipes                    = 79,
         [Description("Gold earned from auctions")]
         GoldEarnedFromAuctions              = 80,
-        // 81
+        [Description("Earn pet battle achievement points")]
+        EarnPetBattleAchievementPoints      = 81,
         [Description("Create auction")]
         CreateAuction                       = 82,
         [Description("Highest auction bid")]
@@ -175,18 +185,21 @@ namespace CriteriaContextViewer.Model
         LootEpicItem                        = 90,
         [Description("Receive epic item")]
         ReceiveEpicItem                     = 91,
-        [Description("Send event")]
-        SendEvent                           = 92,
+        [Description("Send scenario event")]
+        SendScenarioEvent                   = 92,
         [Description("Roll need")]
         RollNeed                            = 93,
         [Description("Roll greed")]
         RollGreed                           = 94,
-        // 95
-        // 96
-        // 97
-        // 98
-        // 99
-        // 100
+        [Description("Release spirit")]
+        ReleaseSpirit                       = 95,
+        [Description("Own pet")]
+        OwnPet                              = 96,
+        [Description("Dungeon encounter complete (Garrison tracking)")]
+        DungeonEncounterCompleteGarrisonTracker = 97,
+        // 98 - 0 criterias
+        // 99 - 0 criterias
+        // 100 - 0 criterias
         [Description("Highest hit dealt")]
         HighestHitDealt                     = 101,
         [Description("Highest hit received")]
@@ -207,7 +220,7 @@ namespace CriteriaContextViewer.Model
         LootType                            = 109,
         [Description("Cast spell 2")]
         CastSpell2                          = 110,
-        // 111
+        // 111 - 0 criterias
         [Description("Learn skill line")]
         LearnSkillLine                      = 112,
         [Description("Earn honorable kill")]
@@ -216,15 +229,20 @@ namespace CriteriaContextViewer.Model
         AcceptedSummons                     = 114,
         [Description("Earned achievement points")]
         EarnedAchievementPoints             = 115,
-        // 116
-        // 117
-        // 118
+        // 116 - 0 criterias
+        // 117 - 0 criterias
+        [Description("Complete LFG dungeon - statistics")]
+        CompleteLFGDungeon                  = 118,
         [Description("Used Looking for Dungeon to group with players")]
         UseLFDToGroupWithPlayers            = 119,
-        // 120
-        // 121
-        // 122
-        // 123
+        [Description("Successfully kick player from LFG after initiating vote")]
+        KickPlayerFromLFG                   = 120,
+        [Description("Successfully kick player from LFG after agreeing vote")]
+        KickPlayerFromLFGAgreed             = 121,
+        [Description("Kicked in LFG")]
+        KickedInLFG                         = 122,
+        [Description("Abandon LFG")]
+        AbandonLFG                          = 123,
         [Description("Guild - Gold spent on repairs")]
         SpentGoldGuildRepairs               = 124,
         [Description("Guild - Reach level")]
@@ -239,7 +257,7 @@ namespace CriteriaContextViewer.Model
         EarnGuildAchievementPoints          = 129,
         [Description("Win rated battleground")]
         WinRatedBattleground                = 130,
-        // 131
+        // 131 - 0 criterias
         [Description("Reach rated battleground rating")]
         ReachRatedBGRating                  = 132,
         [Description("Buy guild tabard")]
@@ -250,16 +268,17 @@ namespace CriteriaContextViewer.Model
         HonorableKillsGuild                 = 135,
         [Description("Guild - Kill creature of type")]
         KillCreatureTypeGuild               = 136,
-        // 137
+        [Description("In LFG group where tank leaves early")]
+        LFGTankLeavesGroupEarly             = 137,
         [Description("Guild - Complete challenge type")]
         CompleteGuildChallengeType          = 138,
         [Description("Guild - Complete challenge")]
         CompleteGuildChallenge              = 139,
-        // 140
-        // 141
-        // 142
-        // 143
-        // 144
+        // 140 - 1 criteria, appears unused
+        // 141 - 1 criteria, appears unused
+        // 142 - 1 criteria, appears unused
+        // 143 - 1 criteria, appears unused
+        // 144 - 1 criteria, appears unused
         [Description("Looking for raid - Dungeons completed")]
         LFRDungeonsCompleted                = 145,
         [Description("Looking for raid - Leaves")]
@@ -276,8 +295,9 @@ namespace CriteriaContextViewer.Model
         CompleteScenarioCount               = 151,
         [Description("Complete scenario")]
         CompleteScenario                    = 152,
-        // 153
-        // 154
+        [Description("Reach areatrigger")]
+        ReachAreatrigger                    = 153,
+        // 154 - 0 criterias
         [Description("Own battle pet")]
         OwnBattlePet                        = 155,
         [Description("Own battle pet count")]
@@ -286,7 +306,7 @@ namespace CriteriaContextViewer.Model
         CaptureBattlePet                    = 157,
         [Description("Win pet battle")]
         WinPetBattle                        = 158,
-        // 159
+        // 159 - 0 criterias
         [Description("Level battle pet")]
         LevelBattlePet                      = 160,
         [Description("Capture battle pet credit")]
@@ -299,7 +319,7 @@ namespace CriteriaContextViewer.Model
         LeaveArea                           = 164,
         [Description("Complete dungeon encounter")]
         CompleteDungeonEncounter            = 165,
-        // 166
+        // 166 - 0 criterias
         [Description("Garrison - Place building")]
         PlaceGarrisonBuilding               = 167,
         [Description("Garrison - Upgrade building")]
@@ -310,20 +330,22 @@ namespace CriteriaContextViewer.Model
         UpgradeGarrison                     = 170,
         [Description("Garrison - Start mission")]
         StartGarrisonMission                = 171,
-        // 172
+        [Description("Order hall - Start mission")]
+        StartOrderHallMission               = 172,
         [Description("Garrison - Completed mission count")]
         CompleteGarrisonMissionCount        = 173,
         [Description("Garrison - Complete mission")]
         CompleteGarrisonMission             = 174,
         [Description("Garrison - Recruit follower count")]
         RecruitGarrisonFollowerCount        = 175,
-        // 176
-        // 177
+        [Description("Garrison - Recruit follower")]
+        RecruitGarrisonFollower             = 176,
+        // 177 - 0 criterias
         [Description("Garrison - Learn blueprint count")]
         LearnGarrisonBlueprintCount         = 178,
-        // 179
-        // 180
-        // 181
+        // 179 - 0 criterias
+        // 180 - 0 criterias
+        // 181 - 0 criterias
         [Description("Garrison - Complete shipment")]
         CompleteGarrisonShipment            = 182,
         [Description("Garrison - Raise follower itemlevel")]
@@ -334,9 +356,9 @@ namespace CriteriaContextViewer.Model
         OwnToy                              = 185,
         [Description("Own toy count")]
         OwnToyCount                         = 186,
-        [Description("Garrison - Recruit follower")]
-        RecruitGarrisonFollower             = 187,
-        // 188
+        [Description("Garrison - Recruit follower with quality")]
+        RecruitGarrisonFollowerQuality      = 187,
+        // 188 - 0 criterias
         [Description("Own heirlooms")]
         OwnHeirlooms                        = 189,
     }
