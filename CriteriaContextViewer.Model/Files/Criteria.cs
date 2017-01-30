@@ -57,12 +57,11 @@ namespace CriteriaContextViewer.Model.Files
             }
 
             if (string.IsNullOrEmpty(text))
-                text = (!Enum.IsDefined(typeof(CriteriaType), Type)
-                    ? $" - (Unknown criteria type \"{Type}\")"
-                    : $" - Unspecified criteria type \"{Enum.GetName(typeof(CriteriaType), Type)}\", data: {Asset}");
+                text = !Enum.IsDefined(typeof(CriteriaType), Type)
+                    ? $" - (Unknown criteria type: \"{Type}\", data: {Asset})"
+                    : $" - Unspecified criteria type \"{Enum.GetName(typeof(CriteriaType), Type)}\", data: {Asset}";
 
-            string stringAddition = Type.NotYetImplemented() ? $"(NYI criteria type id: {(int)Type})" : "";
-            text = $"C {Id} - {stringAddition} {text}";
+            text = $"C {Id} - {text}";
 
             return text;
         }
@@ -105,10 +104,8 @@ namespace CriteriaContextViewer.Model.Files
 
     public enum CriteriaAdditionalCondition
     {
-        [NYI]
         SourceDrunkValue = 1, // NYI
         Unk2 = 2,
-        [NYI]
         ItemLevel = 3, // NYI
         TargetCreatureEntry = 4,
         TargetMustBePlayer = 5,
@@ -123,7 +120,6 @@ namespace CriteriaContextViewer.Model.Files
         SourceAreaOrZone = 17,
         TargetAreaOrZone = 18,
         MaxDifficulty = 20,
-        [NYI]
         TargetCreatureYieldsExperience = 21, // NYI
         ArenaType = 24,
         SourceRace = 25,
@@ -133,13 +129,9 @@ namespace CriteriaContextViewer.Model.Files
         MaxGroupMembers = 29,
         TargetCreatureType = 30,
         SourceMap = 32,
-        [NYI]
         ItemClass = 33, // NYI
-        [NYI]
         ItemSubClass = 34, // NYI
-        [NYI]
         CompleteQuestNotInGroup = 35, // NYI
-        [NYI]
         MinPersonalRating = 37, // NYI (when implementing don't forget about CRITERIA_CONDITION_NO_LOSE)
         TitleBitIndex = 38,
         SourceLevel = 39,
@@ -147,27 +139,19 @@ namespace CriteriaContextViewer.Model.Files
         TargetZone = 41,
         TargetHealthPercentageBelow = 46,
         Unk55 = 55,
-        [NYI]
         MinAchievementPoints = 56, // NYI
-        [NYI]
         RequiresLFGGroup = 58, // NYI
         Unk60 = 60,
-        [NYI]
         RequiresGuildGroup = 61, // NYI
-        [NYI]
         GuildReputation = 62, // NYI
-        [NYI]
         RatedBattleground = 63, // NYI
         ProjectRarity = 65,
         ProjectRace = 66,
         BattlePetSpecies = 91,
         GarrisonFollowerQuality = 145,
         GarrisonFollowerLevel = 146,
-        [NYI]
         GarrisonRareMission = 147, // NYI
-        [NYI]
         GarrisonBuildingLevel = 149, // NYI
-        [NYI]
         GarrisonMissionType = 167, // NYI
         GarrisonFollowerItemlevel = 184,
     };

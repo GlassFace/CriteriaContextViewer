@@ -128,7 +128,6 @@ namespace CriteriaContextViewer.Model
         MoneyFromQuestReward                = 62,
         [Description("Gold spent on traveling")]
         GoldSpentOnTraveling                = 63,
-        [NYI]
         [Description("Defeat creature group")]
         DefeatCreatureGroup                 = 64,
         [Description("Gold spent at barber")]
