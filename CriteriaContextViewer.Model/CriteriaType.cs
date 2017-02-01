@@ -11,15 +11,18 @@ namespace CriteriaContextViewer.Model
         WinBattleground                     = 1,
 
         // 2 - 0 criterias
+        
         [Description("Complete archeology projects")]
         CompleteArcheologyProjects          = 3,
 
+        [NYI]
         [Description("Survey gameobject")]
         SurveyGameobject                    = 4, // With "Luron" present only? http://www.wowhead.com/npc=103733/luron
 
         [Description("Reach level")]
         ReachLevel                          = 5,
 
+        [NYI]
         [Description("Clear digsite")]
         ClearDigsite                        = 6,
 
@@ -65,9 +68,11 @@ namespace CriteriaContextViewer.Model
         [Description("Killed by creature")]
         KilledByCreature                    = 20,
 
+        [NYI]
         [Description("Granted criteria")]
         ManuallyGivenCriteria               = 21,
 
+        [NYI]
         [Description("Guild - Complete challenge mode")]
         GuildCompleteChallengeMode          = 22,
 
@@ -212,12 +217,14 @@ namespace CriteriaContextViewer.Model
         [Description("Special PVP kill")]
         SpecialPvpKill                      = 70,
 
+        [NYI]
         [Description("Complete challenge mode")]
         CompleteChallengeMode               = 71,
 
         [Description("Fish in gameobject")]
         FishInGameobject                    = 72,
 
+        [NYI]
         [Description("Send event")]
         SendEvent                           = 73,
 
@@ -236,12 +243,14 @@ namespace CriteriaContextViewer.Model
         [Description("Kill creature of type")]
         KillCreatureType                    = 78,
 
+        [NYI]
         [Description("Guild - Cook recipes")]
         GuildCookRecipes                    = 79,
 
         [Description("Gold earned from auctions")]
         GoldEarnedFromAuctions              = 80,
 
+        [NYI]
         [Description("Earn pet battle achievement points")]
         EarnPetBattleAchievementPoints      = 81,
 
@@ -285,12 +294,15 @@ namespace CriteriaContextViewer.Model
         [Description("Roll greed")]
         RollGreed                           = 94,
 
+        [NYI]
         [Description("Release spirit")]
         ReleaseSpirit                       = 95,
 
+        [NYI]
         [Description("Own pet")]
         OwnPet                              = 96,
 
+        [NYI]
         [Description("Dungeon encounter complete (Garrison tracking)")]
         DungeonEncounterCompleteGarrisonTracker = 97,
 
@@ -353,15 +365,19 @@ namespace CriteriaContextViewer.Model
         [Description("Used Looking for Dungeon to group with players")]
         UseLFDToGroupWithPlayers            = 119,
 
+        [NYI]
         [Description("Successfully kick player from LFG after initiating vote")]
         KickPlayerFromLFG                   = 120,
 
+        [NYI]
         [Description("Successfully kick player from LFG after agreeing vote")]
         KickPlayerFromLFGAgreed             = 121,
 
+        [NYI]
         [Description("Kicked in LFG")]
         KickedInLFG                         = 122,
 
+        [NYI]
         [Description("Abandon LFG")]
         AbandonLFG                          = 123,
 
@@ -403,6 +419,7 @@ namespace CriteriaContextViewer.Model
         [Description("Guild - Kill creature of type")]
         KillCreatureTypeGuild               = 136,
 
+        [NYI]
         [Description("In LFG group where tank leaves early")]
         LFGTankLeavesGroupEarly             = 137,
 
@@ -484,6 +501,7 @@ namespace CriteriaContextViewer.Model
         CompleteDungeonEncounter            = 165,
 
         // 166 - 0 criterias
+
         [Description("Garrison - Place building")]
         PlaceGarrisonBuilding               = 167,
 
