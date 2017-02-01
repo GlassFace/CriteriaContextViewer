@@ -14,8 +14,7 @@ namespace CriteriaContextViewer.Model
         {
             if (!typeof(T).IsEnum)
                 return true;
-
-            return true;
+            
             return typeof(T).GetField(value.ToString()).IsDefined(typeof(NYIAttribute), false);
         }
 

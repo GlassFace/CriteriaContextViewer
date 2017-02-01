@@ -56,7 +56,7 @@ namespace CriteriaContextViewer.Forms
             }
             _mDefinitions.Load(DBCLayoutFilePath);
 
-            scenarioSearchBy.DataSource = Enum.GetValues(typeof(ScenarioSearchType));
+            comboBoxScenariosSearchBy.DataSource = Enum.GetValues(typeof(ScenarioSearchType));
         }
 
         public IEnumerable<string> GetMissingFiles()
@@ -316,7 +316,7 @@ namespace CriteriaContextViewer.Forms
 
         private void buttonSearchScenarios_Click(object sender, EventArgs e)
         {
-            ScenarioSearchType searchType = (ScenarioSearchType) scenarioSearchBy.SelectedItem;
+            ScenarioSearchType searchType = (ScenarioSearchType) comboBoxScenariosSearchBy.SelectedItem;
             switch (searchType)
             {
                 case ScenarioSearchType.ByScenarioName:

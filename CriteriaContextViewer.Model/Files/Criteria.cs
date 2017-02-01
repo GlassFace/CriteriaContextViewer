@@ -46,11 +46,20 @@ namespace CriteriaContextViewer.Model.Files
                 case CriteriaType.DefeatCreatureGroup:
                     text = $"Defeat creature group (id: {Asset})";
                     break;
-                case CriteriaType.SendScenarioEvent:
-                    text = $"Scenario event \"{Asset}\" is sent";
+                case CriteriaType.SendEvent:
+                    text = $"Event \"{Asset}\" is sent";
+                    break;
+                case CriteriaType.SendEventScenario:
+                    text = $"Event \"{Asset}\" is sent to scenario";
                     break;
                 case CriteriaType.CastSpell2:
                     text = $"Hit a target with spell (id: {Asset})";
+                    break;
+                case CriteriaType.LootItem:
+                    text = $"Loot item with id \"{Asset}\"";
+                    break;
+                case CriteriaType.ReachAreatrigger:
+                    text = $"Reach areatrigger using ActionSet id \"{Asset}\"";
                     break;
                 default:
                     break;
@@ -61,8 +70,9 @@ namespace CriteriaContextViewer.Model.Files
                     ? $" - (Unknown criteria type \"{Type}\")"
                     : $" - Unspecified criteria type \"{Enum.GetName(typeof(CriteriaType), Type)}\", data: {Asset}");
 
-            string stringAddition = Type.NotYetImplemented() ? $"(NYI criteria type id: {(int)Type})" : "";
-            text = $"C {Id} - {stringAddition} {text}";
+            text = $"C {Id} - {text}";
+            if (Type.NotYetImplemented())
+                text += " (NYI)";
 
             return text;
         }
