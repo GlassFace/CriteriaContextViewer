@@ -218,12 +218,7 @@ namespace CriteriaContextViewer.Forms
             if (ProgramSettings.UseItems)
                 LoadItems();
         }
-
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
+        
         private void listBox1_SelectedValueChanged(object sender, EventArgs e)
         {
             Scenario scenario = (Scenario) listBoxScenarios.SelectedItem;
@@ -556,13 +551,7 @@ namespace CriteriaContextViewer.Forms
             else
                 textBoxSearchScenarios.Enabled = true;
         }
-
-        private void buttonInspectCriterias_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Not yet implemented", "NYI", MessageBoxButtons.OK, MessageBoxIcon.Information,
-                MessageBoxDefaultButton.Button1);
-        }
-
+        
         private void linkLabelScenarioStepQuestReward_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start(WowheadUtils.GetWowheadURLForQuest(int.Parse(textBoxScenarioStepQuestRewardId.Text)));
