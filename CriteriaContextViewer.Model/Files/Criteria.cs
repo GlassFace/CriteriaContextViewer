@@ -59,12 +59,23 @@ namespace CriteriaContextViewer.Model.Files
                     text = $"Hit a target with spell (id: {Asset})";
                     break;
                 case CriteriaType.LootItem:
+                {
                     Item item = _dbcDataProvider.GetItem(Asset);
                     if (!string.IsNullOrEmpty(item?.Name))
                         text = $"Loot \"{item.Name}\" ({Asset})";
                     else
                         text = $"Loot item with id \"{Asset}\"";
                     break;
+                }
+                case CriteriaType.OwnItem:
+                {
+                    Item item = _dbcDataProvider.GetItem(Asset);
+                    if (!string.IsNullOrEmpty(item?.Name))
+                        text = $"Own item \"{item.Name}\" ({Asset})";
+                    else
+                        text = $"Own item with id \"{Asset}\"";
+                    break;
+                }
                 case CriteriaType.ReachAreatrigger:
                     text = $"Reach areatrigger using ActionSet id \"{Asset}\"";
                     break;
