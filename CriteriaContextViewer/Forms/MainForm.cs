@@ -24,27 +24,25 @@ namespace CriteriaContextViewer.Forms
     {
         private readonly XmlDocument _mDefinitions;
         private const string DbcLayoutFileName = @"dbclayout.xml";
+        private DBCDataStore _dbcDataStore;
 
-        public Dictionary<short, Scenario> Scenarios { get; set; }
-        public Dictionary<short, ScenarioStep> ScenarioSteps { get; set; }
-        public Dictionary<uint, CriteriaTree> CriteriaTrees { get; set; }
-        public Dictionary<uint, Criteria> Criterias { get; set; }
+        private Dictionary<uint, Scenario> Scenarios => _dbcDataStore.Scenarios;
 
         public string DBCLayoutFilePath => Path.Combine(AssemblyUtils.ExecutingAssemblyPath, DbcLayoutFileName);
         public string ScenarioFilePath => Path.Combine(AssemblyUtils.ExecutingAssemblyPath, Scenario.FileName);
         public string ScenarioStepFilePath => Path.Combine(AssemblyUtils.ExecutingAssemblyPath, ScenarioStep.FileName);
         public string CriteriaFilePath => Path.Combine(AssemblyUtils.ExecutingAssemblyPath, Criteria.FileName);
         public string CriteriaTreeFilePath => Path.Combine(AssemblyUtils.ExecutingAssemblyPath, CriteriaTree.FileName);
+        public string DungeonEncounterFilePath => Path.Combine(AssemblyUtils.ExecutingAssemblyPath, DungeonEncounter.FileName);
+        public string ItemFilePath => Path.Combine(AssemblyUtils.ExecutingAssemblyPath, Item.FileName);
 
         public MainForm()
         {
             InitializeComponent();
 
-            Scenarios = new Dictionary<short, Scenario>();
-            ScenarioSteps = new Dictionary<short, ScenarioStep>();
-            Criterias = new Dictionary<uint, Criteria>();
-            CriteriaTrees = new Dictionary<uint, CriteriaTree>();
             _mDefinitions = new XmlDocument();
+
+            _dbcDataStore = new DBCDataStore();
 
             IEnumerable<string> missingFiles = GetMissingFiles();
             if (missingFiles.Any())
@@ -66,17 +64,23 @@ namespace CriteriaContextViewer.Forms
             if (!File.Exists(DBCLayoutFilePath))
                 missingFiles.Add(Path.GetFileName(DBCLayoutFilePath));
 
+            if (!File.Exists(CriteriaFilePath))
+                missingFiles.Add(Path.GetFileName(CriteriaFilePath));
+
+            if (!File.Exists(CriteriaTreeFilePath))
+                missingFiles.Add(Path.GetFileName(CriteriaTreeFilePath));
+
             if (!File.Exists(ScenarioFilePath))
                 missingFiles.Add(Path.GetFileName(ScenarioFilePath));
 
             if (!File.Exists(ScenarioStepFilePath))
                 missingFiles.Add(Path.GetFileName(ScenarioStepFilePath));
 
-            if (!File.Exists(CriteriaFilePath))
-                missingFiles.Add(Path.GetFileName(CriteriaFilePath));
+            if (ProgramSettings.UseDungeonEncounters && !File.Exists(DungeonEncounterFilePath))
+                missingFiles.Add(Path.GetFileName(DungeonEncounterFilePath));
 
-            if (!File.Exists(CriteriaTreeFilePath))
-                missingFiles.Add(Path.GetFileName(CriteriaTreeFilePath));
+            if (ProgramSettings.UseItems && !File.Exists(ItemFilePath))
+                missingFiles.Add(Path.GetFileName(ItemFilePath));
 
             return missingFiles;
         }
@@ -94,6 +98,10 @@ namespace CriteriaContextViewer.Forms
             }
             catch (Exception)
             {
+                DialogResult result = MessageBox.Show($"Could not get load file \"{fileName}\", make sure it exists in the program root directory", "Load error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
+                if (result == DialogResult.Retry)
+                    return LoadDBCObject<T>(type, fileName);
+
                 return new List<T>();
             }
 
@@ -101,102 +109,89 @@ namespace CriteriaContextViewer.Forms
             foreach (var row in dbReader.Rows)
             {
                 T t = new T();
-                t.ReadObject(dbReader, row);
+                t.ReadObject(dbReader, row, _dbcDataStore);
                 objects.Add(t);
             }
 
             return objects;
         }
 
-        public void LoadCriterias(bool reload = false)
+        public void LoadCriterias()
         {
-            if (reload)
-                Criterias.Clear();
-
-            if (!Criterias.Any())
-                Criterias =
-                    LoadDBCObject<Criteria>(typeof(Criteria), Criteria.FileName)
-                        .ToDictionary(criteria => criteria.Id, criteria => criteria);
+            LoadDBCObject<Criteria>(typeof(Criteria), Criteria.FileName).ToList().ForEach(_dbcDataStore.Add);
         }
 
-        public void LoadCriteriaTrees(bool reload = false)
+        public void LoadCriteriaTrees()
         {
-            LoadCriterias(reload);
+            LoadCriterias();
 
-            if (reload)
-                CriteriaTrees.Clear();
+            LoadDBCObject<CriteriaTree>(typeof(CriteriaTree), CriteriaTree.FileName).ToList().ForEach(_dbcDataStore.Add);
 
-            if (!CriteriaTrees.Any())
-                CriteriaTrees =
-                    LoadDBCObject<CriteriaTree>(typeof(CriteriaTree), CriteriaTree.FileName)
-                        .ToDictionary(criteriaTree => criteriaTree.Id, criteriaTree => criteriaTree);
-
-            foreach (var criteriaTree in CriteriaTrees)
+            foreach (var criteriaTree in _dbcDataStore.CriteriaTrees)
             {
-                if (Criterias.ContainsKey(criteriaTree.Value.CriteriaId))
-                    criteriaTree.Value.Criteria = Criterias[criteriaTree.Value.CriteriaId];
+                if (_dbcDataStore.Criterias.ContainsKey(criteriaTree.Value.CriteriaId))
+                    criteriaTree.Value.Criteria = _dbcDataStore.Criterias[criteriaTree.Value.CriteriaId];
 
-                if (CriteriaTrees.ContainsKey(criteriaTree.Value.ParentId))
+                if (_dbcDataStore.CriteriaTrees.ContainsKey(criteriaTree.Value.ParentId))
                 {
-                    criteriaTree.Value.Parent = CriteriaTrees[criteriaTree.Value.ParentId];
-                    CriteriaTrees[criteriaTree.Value.ParentId].Children.Add(criteriaTree.Value);
+                    criteriaTree.Value.Parent = _dbcDataStore.CriteriaTrees[criteriaTree.Value.ParentId];
+                    _dbcDataStore.CriteriaTrees[criteriaTree.Value.ParentId].Children.Add(criteriaTree.Value);
                 }
             }
 
             // Order criteria tree children by criteria tree child index
-            foreach (var criteriaTree in CriteriaTrees)
+            foreach (var criteriaTree in _dbcDataStore.CriteriaTrees)
             {
                 criteriaTree.Value.Children = criteriaTree.Value.Children.OrderBy(tree => tree.OrderIndex).ToList();
             }
         }
 
-        public void LoadScenarios(bool reload = false)
+        public void LoadScenarios()
         {
-            LoadCriteriaTrees(reload);
+            LoadCriteriaTrees();
+            LoadDBCObject<Scenario>(typeof(Scenario), Scenario.FileName).ToList().ForEach(_dbcDataStore.Add);
+            LoadDBCObject<ScenarioStep>(typeof(ScenarioStep), ScenarioStep.FileName).ToList().ForEach(_dbcDataStore.Add);
 
-            if (reload)
-                Scenarios.Clear();
-
-            if (!Scenarios.Any())
-                Scenarios =
-                    LoadDBCObject<Scenario>(typeof(Scenario), Scenario.FileName)
-                        .ToDictionary(scenario => (short) scenario.Id, scenario => scenario);
-
-            if (reload)
-                ScenarioSteps.Clear();
-
-            if (!ScenarioSteps.Any())
-                ScenarioSteps =
-                    LoadDBCObject<ScenarioStep>(typeof(ScenarioStep), ScenarioStep.FileName)
-                        .ToDictionary(scenarioStep => (short) scenarioStep.Id, scenarioStep => scenarioStep);
-
-            foreach (var scenarioStep in ScenarioSteps)
+            foreach (var scenarioStep in _dbcDataStore.ScenarioSteps)
             {
                 // Setup Scenario links
-                if (Scenarios.ContainsKey(scenarioStep.Value.ScenarioId))
+                if (_dbcDataStore.Scenarios.ContainsKey(scenarioStep.Value.ScenarioId))
                 {
-                    Scenarios[scenarioStep.Value.ScenarioId].Steps.Add(scenarioStep.Value);
-                    scenarioStep.Value.Scenario = Scenarios[scenarioStep.Value.ScenarioId];
+                    _dbcDataStore.Scenarios[scenarioStep.Value.ScenarioId].Steps.Add(scenarioStep.Value);
+                    scenarioStep.Value.Scenario = _dbcDataStore.Scenarios[scenarioStep.Value.ScenarioId];
                 }
 
                 // Setup Scenario Step links
-                if (ScenarioSteps.ContainsKey(scenarioStep.Value.PreviousStepId))
+                if (_dbcDataStore.ScenarioSteps.ContainsKey(scenarioStep.Value.PreviousStepId))
                     scenarioStep.Value.PreviousStep =
-                        ScenarioSteps[scenarioStep.Value.PreviousStepId];
+                        _dbcDataStore.ScenarioSteps[scenarioStep.Value.PreviousStepId];
 
-                if (ScenarioSteps.ContainsKey((short) scenarioStep.Value.BonusObjectiveRequiredStepId))
+                if (_dbcDataStore.ScenarioSteps.ContainsKey(scenarioStep.Value.BonusObjectiveRequiredStepId))
                     scenarioStep.Value.BonusObjectiveRequiredStep =
-                        ScenarioSteps[(short) scenarioStep.Value.BonusObjectiveRequiredStepId];
+                        _dbcDataStore.ScenarioSteps[scenarioStep.Value.BonusObjectiveRequiredStepId];
 
-                if (CriteriaTrees.ContainsKey(scenarioStep.Value.CriteriaTreeId))
-                    scenarioStep.Value.CriteriaTree = CriteriaTrees[scenarioStep.Value.CriteriaTreeId];
+                if (_dbcDataStore.CriteriaTrees.ContainsKey(scenarioStep.Value.CriteriaTreeId))
+                    scenarioStep.Value.CriteriaTree = _dbcDataStore.CriteriaTrees[scenarioStep.Value.CriteriaTreeId];
             }
 
             // Order scenario steps in scenarios by scenario step index
-            foreach (var scenario in Scenarios)
+            foreach (var scenario in _dbcDataStore.Scenarios)
             {
                 scenario.Value.Steps = scenario.Value.Steps.OrderBy(step => step.StepIndex).ToList();
             }
+        }
+
+        public void LoadDungeonEncounters()
+            =>
+                LoadDBCObject<DungeonEncounter>(typeof(DungeonEncounter), DungeonEncounter.FileName)
+                    .ToList()
+                    .ForEach(_dbcDataStore.Add);
+
+        public void LoadItems()
+        {
+            toolStripStatusLabel1.Text = "Loading Item-sparse.db2...";
+            toolStripStatusLabel1.Invalidate();
+            statusStrip1.Update();
         }
 
         private XmlElement GetDefinition(string dbcName, string dbcNameWithExt)
@@ -217,7 +212,11 @@ namespace CriteriaContextViewer.Forms
         private void tabControl1_Enter(object sender, EventArgs e)
         {
             LoadScenarios();
-            listBoxScenarios.DataSource = Scenarios.Select(scenario => scenario.Value).ToList();
+            listBoxScenarios.DataSource = _dbcDataStore.Scenarios.Select(scenario => scenario.Value).ToList();
+            if (ProgramSettings.UseDungeonEncounters)
+                LoadDungeonEncounters();
+            if (ProgramSettings.UseItems)
+                LoadItems();
         }
 
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
@@ -567,6 +566,50 @@ namespace CriteriaContextViewer.Forms
         private void linkLabelScenarioStepQuestReward_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start(WowheadUtils.GetWowheadURLForQuest(int.Parse(textBoxScenarioStepQuestRewardId.Text)));
+        }
+
+        private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OptionsModel optionsModel = new OptionsModel
+            {
+                UseDungeonEncounter = ProgramSettings.UseDungeonEncounters,
+                UseItems = ProgramSettings.UseItems
+            };
+            OptionsForm optionsForm = new OptionsForm(ref optionsModel);
+            optionsForm.ShowDialog();
+            UpdateDBCFiles(optionsModel);
+
+            if (optionsModel.UseDungeonEncounter != ProgramSettings.UseDungeonEncounters)
+                ProgramSettings.UseDungeonEncounters = optionsModel.UseDungeonEncounter;
+
+            if (optionsModel.UseItems != ProgramSettings.UseItems)
+                ProgramSettings.UseItems = optionsModel.UseItems;
+        }
+
+        public void UpdateDBCFiles(OptionsModel options)
+        {
+            if (options.UseDungeonEncounter && !_dbcDataStore.DungeonEncounters.Any())
+                LoadDungeonEncounters();
+            else if (!options.UseDungeonEncounter && _dbcDataStore.DungeonEncounters.Any())
+                _dbcDataStore.DungeonEncounters.Clear();
+
+            if (options.UseItems && !_dbcDataStore.Items.Any())
+                LoadItems();
+            else if (!options.UseItems & _dbcDataStore.Items.Any())
+                _dbcDataStore.Items.Clear();
+        }
+
+        private void toolStripStatusLabel1_TextChanged(object sender, EventArgs e)
+        {
+            if (toolStripStatusLabel1.Text == "Loading Item-sparse.db2...")
+            {
+                LoadDBCObject<Item>(typeof(Item), Item.FileName)
+                    .ToList()
+                    .ForEach(_dbcDataStore.Add);
+                toolStripStatusLabel1.Text = "Ready";
+                toolStripStatusLabel1.Invalidate();
+                statusStrip1.Update();
+            }
         }
     }
 

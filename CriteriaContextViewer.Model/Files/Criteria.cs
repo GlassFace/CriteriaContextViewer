@@ -25,7 +25,10 @@ namespace CriteriaContextViewer.Model.Files
         public CriteriaCondition FailEvent { get; set; }
         public byte Flags { get; set; }
         public byte EligibilityWorldStateValue { get; set; }
+        public string AssetCustomValue { get; set; }
 
+        private IDBCDataProvider _dbcDataProvider;
+        
         public override string ToString()
         {
             string text = "";
@@ -56,10 +59,21 @@ namespace CriteriaContextViewer.Model.Files
                     text = $"Hit a target with spell (id: {Asset})";
                     break;
                 case CriteriaType.LootItem:
-                    text = $"Loot item with id \"{Asset}\"";
+                    Item item = _dbcDataProvider.GetItem(Asset);
+                    if (!string.IsNullOrEmpty(item?.Name))
+                        text = $"Loot \"{item.Name}\" ({Asset})";
+                    else
+                        text = $"Loot item with id \"{Asset}\"";
                     break;
                 case CriteriaType.ReachAreatrigger:
                     text = $"Reach areatrigger using ActionSet id \"{Asset}\"";
+                    break;
+                case CriteriaType.CompleteDungeonEncounter:
+                    DungeonEncounter dungeonEncounter = _dbcDataProvider.GetDungeonEncounter(Asset);
+                    if (!string.IsNullOrEmpty(dungeonEncounter?.Name))
+                        text = $"Complete the {dungeonEncounter.Name} ({Asset}) dungeon encounter";
+                    else
+                        text = $"Complete dungeon encounter \"{Asset}\"";
                     break;
                 default:
                     break;
@@ -77,12 +91,13 @@ namespace CriteriaContextViewer.Model.Files
             return text;
         }
 
-        public void ReadObject(IWowClientDBReader dbReader, BinaryReader binaryReader)
+        public void ReadObject(IWowClientDBReader dbReader, BinaryReader binaryReader, IDBCDataProvider dbcDataProvider)
         {
+            _dbcDataProvider = dbcDataProvider;
+
             using (BinaryReader br = binaryReader)
             {
-                if (dbReader.HasSeparateIndexColumn)
-                    Id = br.ReadUInt32();
+                Id = br.ReadUInt32();
 
                 Asset = br.ReadUInt32();
                 StartAsset = br.ReadUInt32();

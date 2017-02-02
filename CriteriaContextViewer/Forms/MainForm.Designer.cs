@@ -30,48 +30,54 @@
         {
             this.scenarios = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.labelScenarioName = new System.Windows.Forms.Label();
-            this.labelScenarioId = new System.Windows.Forms.Label();
-            this.textBoxScenarioId = new System.Windows.Forms.TextBox();
-            this.labelScenarioData = new System.Windows.Forms.Label();
-            this.textBoxScenarioData = new System.Windows.Forms.TextBox();
-            this.labelScenarioFlags = new System.Windows.Forms.Label();
-            this.labelScenarioType = new System.Windows.Forms.Label();
-            this.textBoxScenarioType = new System.Windows.Forms.TextBox();
-            this.listBoxScenarioFlags = new System.Windows.Forms.ListBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.labelScenarioStepName = new System.Windows.Forms.Label();
-            this.labelScenarioStepId = new System.Windows.Forms.Label();
-            this.labelScenarioStepIndex = new System.Windows.Forms.Label();
-            this.textBoxScenarioStepIndex = new System.Windows.Forms.TextBox();
-            this.textBoxScenarioStepId = new System.Windows.Forms.TextBox();
-            this.labelScenarioStepRequiredStepId = new System.Windows.Forms.Label();
-            this.textBoxScenarioStepRequiredStepId = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.checkBoxScenarioStepBonusObjective = new System.Windows.Forms.CheckBox();
-            this.listBoxScenarioSteps = new System.Windows.Forms.ListBox();
-            this.labelScenarioStepDescription = new System.Windows.Forms.Label();
-            this.textBoxScenarioStepDescription = new System.Windows.Forms.TextBox();
-            this.linkLabelScenarioStepQuestReward = new System.Windows.Forms.LinkLabel();
-            this.textBoxScenarioStepQuestRewardId = new System.Windows.Forms.TextBox();
-            this.treeViewScenarioStepCriteriaTrees = new System.Windows.Forms.TreeView();
-            this.label4 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.listBoxScenarios = new System.Windows.Forms.ListBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.buttonSearchScenarios = new System.Windows.Forms.Button();
-            this.comboBoxScenariosSearchBy = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.textBoxSearchScenarios = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.comboBoxScenariosSearchBy = new System.Windows.Forms.ComboBox();
+            this.buttonSearchScenarios = new System.Windows.Forms.Button();
+            this.listBoxScenarios = new System.Windows.Forms.ListBox();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.treeViewScenarioStepCriteriaTrees = new System.Windows.Forms.TreeView();
+            this.textBoxScenarioStepQuestRewardId = new System.Windows.Forms.TextBox();
+            this.linkLabelScenarioStepQuestReward = new System.Windows.Forms.LinkLabel();
+            this.textBoxScenarioStepDescription = new System.Windows.Forms.TextBox();
+            this.labelScenarioStepDescription = new System.Windows.Forms.Label();
+            this.listBoxScenarioSteps = new System.Windows.Forms.ListBox();
+            this.checkBoxScenarioStepBonusObjective = new System.Windows.Forms.CheckBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.textBoxScenarioStepRequiredStepId = new System.Windows.Forms.TextBox();
+            this.labelScenarioStepRequiredStepId = new System.Windows.Forms.Label();
+            this.textBoxScenarioStepId = new System.Windows.Forms.TextBox();
+            this.textBoxScenarioStepIndex = new System.Windows.Forms.TextBox();
+            this.labelScenarioStepIndex = new System.Windows.Forms.Label();
+            this.labelScenarioStepId = new System.Windows.Forms.Label();
+            this.labelScenarioStepName = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.listBoxScenarioFlags = new System.Windows.Forms.ListBox();
+            this.textBoxScenarioType = new System.Windows.Forms.TextBox();
+            this.labelScenarioType = new System.Windows.Forms.Label();
+            this.labelScenarioFlags = new System.Windows.Forms.Label();
+            this.textBoxScenarioData = new System.Windows.Forms.TextBox();
+            this.labelScenarioData = new System.Windows.Forms.Label();
+            this.textBoxScenarioId = new System.Windows.Forms.TextBox();
+            this.labelScenarioId = new System.Windows.Forms.Label();
+            this.labelScenarioName = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.scenarios.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            this.panel2.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // scenarios
@@ -80,7 +86,7 @@
             this.scenarios.Location = new System.Drawing.Point(4, 22);
             this.scenarios.Name = "scenarios";
             this.scenarios.Padding = new System.Windows.Forms.Padding(3);
-            this.scenarios.Size = new System.Drawing.Size(1193, 520);
+            this.scenarios.Size = new System.Drawing.Size(1193, 496);
             this.scenarios.TabIndex = 1;
             this.scenarios.Text = "Scenarios";
             this.scenarios.UseVisualStyleBackColor = true;
@@ -97,10 +103,97 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 514F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1187, 514);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 490F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1187, 490);
             this.tableLayoutPanel1.TabIndex = 0;
             this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint);
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 1;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.Controls.Add(this.panel1, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.listBoxScenarios, 0, 1);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 2;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.98425F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 74.01575F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(191, 484);
+            this.tableLayoutPanel2.TabIndex = 0;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.textBoxSearchScenarios);
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.comboBoxScenariosSearchBy);
+            this.panel1.Controls.Add(this.buttonSearchScenarios);
+            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(185, 119);
+            this.panel1.TabIndex = 1;
+            // 
+            // textBoxSearchScenarios
+            // 
+            this.textBoxSearchScenarios.Location = new System.Drawing.Point(7, 61);
+            this.textBoxSearchScenarios.Name = "textBoxSearchScenarios";
+            this.textBoxSearchScenarios.Size = new System.Drawing.Size(175, 20);
+            this.textBoxSearchScenarios.TabIndex = 4;
+            this.textBoxSearchScenarios.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxSearchScenarios_KeyDown);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(4, 44);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(56, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Search for";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(4, 4);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(55, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Search by";
+            // 
+            // comboBoxScenariosSearchBy
+            // 
+            this.comboBoxScenariosSearchBy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxScenariosSearchBy.FormattingEnabled = true;
+            this.comboBoxScenariosSearchBy.Location = new System.Drawing.Point(7, 20);
+            this.comboBoxScenariosSearchBy.Name = "comboBoxScenariosSearchBy";
+            this.comboBoxScenariosSearchBy.Size = new System.Drawing.Size(175, 21);
+            this.comboBoxScenariosSearchBy.TabIndex = 1;
+            this.comboBoxScenariosSearchBy.Tag = "Search by";
+            this.comboBoxScenariosSearchBy.SelectedValueChanged += new System.EventHandler(this.scenarioSearchBy_SelectedValueChanged);
+            // 
+            // buttonSearchScenarios
+            // 
+            this.buttonSearchScenarios.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.buttonSearchScenarios.Location = new System.Drawing.Point(7, 88);
+            this.buttonSearchScenarios.Name = "buttonSearchScenarios";
+            this.buttonSearchScenarios.Size = new System.Drawing.Size(175, 23);
+            this.buttonSearchScenarios.TabIndex = 0;
+            this.buttonSearchScenarios.Text = "Search";
+            this.buttonSearchScenarios.UseVisualStyleBackColor = true;
+            this.buttonSearchScenarios.Click += new System.EventHandler(this.buttonSearchScenarios_Click);
+            // 
+            // listBoxScenarios
+            // 
+            this.listBoxScenarios.DisplayMember = "Display";
+            this.listBoxScenarios.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listBoxScenarios.FormattingEnabled = true;
+            this.listBoxScenarios.Location = new System.Drawing.Point(3, 128);
+            this.listBoxScenarios.Name = "listBoxScenarios";
+            this.listBoxScenarios.Size = new System.Drawing.Size(185, 353);
+            this.listBoxScenarios.TabIndex = 2;
+            this.listBoxScenarios.ValueMember = "Value";
+            this.listBoxScenarios.SelectedValueChanged += new System.EventHandler(this.listBox1_SelectedValueChanged);
             // 
             // panel2
             // 
@@ -133,216 +226,33 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(209, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(975, 508);
+            this.panel2.Size = new System.Drawing.Size(975, 484);
             this.panel2.TabIndex = 1;
             // 
-            // labelScenarioName
+            // label4
             // 
-            this.labelScenarioName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelScenarioName.Location = new System.Drawing.Point(10, 10);
-            this.labelScenarioName.Margin = new System.Windows.Forms.Padding(10);
-            this.labelScenarioName.Name = "labelScenarioName";
-            this.labelScenarioName.Size = new System.Drawing.Size(234, 20);
-            this.labelScenarioName.TabIndex = 2;
-            this.labelScenarioName.Text = "Scenario name";
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(583, 10);
+            this.label4.Margin = new System.Windows.Forms.Padding(10);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(234, 20);
+            this.label4.TabIndex = 34;
+            this.label4.Text = "Criterias";
             // 
-            // labelScenarioId
+            // treeViewScenarioStepCriteriaTrees
             // 
-            this.labelScenarioId.AutoSize = true;
-            this.labelScenarioId.Location = new System.Drawing.Point(25, 47);
-            this.labelScenarioId.Name = "labelScenarioId";
-            this.labelScenarioId.Size = new System.Drawing.Size(16, 13);
-            this.labelScenarioId.TabIndex = 3;
-            this.labelScenarioId.Tag = "";
-            this.labelScenarioId.Text = "Id";
+            this.treeViewScenarioStepCriteriaTrees.Location = new System.Drawing.Point(587, 43);
+            this.treeViewScenarioStepCriteriaTrees.Name = "treeViewScenarioStepCriteriaTrees";
+            this.treeViewScenarioStepCriteriaTrees.Size = new System.Drawing.Size(367, 444);
+            this.treeViewScenarioStepCriteriaTrees.TabIndex = 33;
             // 
-            // textBoxScenarioId
+            // textBoxScenarioStepQuestRewardId
             // 
-            this.textBoxScenarioId.Location = new System.Drawing.Point(28, 64);
-            this.textBoxScenarioId.Name = "textBoxScenarioId";
-            this.textBoxScenarioId.ReadOnly = true;
-            this.textBoxScenarioId.Size = new System.Drawing.Size(50, 20);
-            this.textBoxScenarioId.TabIndex = 4;
-            // 
-            // labelScenarioData
-            // 
-            this.labelScenarioData.AutoSize = true;
-            this.labelScenarioData.Location = new System.Drawing.Point(25, 127);
-            this.labelScenarioData.Name = "labelScenarioData";
-            this.labelScenarioData.Size = new System.Drawing.Size(30, 13);
-            this.labelScenarioData.TabIndex = 5;
-            this.labelScenarioData.Tag = "";
-            this.labelScenarioData.Text = "Data";
-            // 
-            // textBoxScenarioData
-            // 
-            this.textBoxScenarioData.Location = new System.Drawing.Point(28, 144);
-            this.textBoxScenarioData.Name = "textBoxScenarioData";
-            this.textBoxScenarioData.ReadOnly = true;
-            this.textBoxScenarioData.Size = new System.Drawing.Size(216, 20);
-            this.textBoxScenarioData.TabIndex = 6;
-            // 
-            // labelScenarioFlags
-            // 
-            this.labelScenarioFlags.AutoSize = true;
-            this.labelScenarioFlags.Location = new System.Drawing.Point(25, 167);
-            this.labelScenarioFlags.Name = "labelScenarioFlags";
-            this.labelScenarioFlags.Size = new System.Drawing.Size(32, 13);
-            this.labelScenarioFlags.TabIndex = 7;
-            this.labelScenarioFlags.Tag = "";
-            this.labelScenarioFlags.Text = "Flags";
-            // 
-            // labelScenarioType
-            // 
-            this.labelScenarioType.AutoSize = true;
-            this.labelScenarioType.Location = new System.Drawing.Point(25, 87);
-            this.labelScenarioType.Name = "labelScenarioType";
-            this.labelScenarioType.Size = new System.Drawing.Size(31, 13);
-            this.labelScenarioType.TabIndex = 9;
-            this.labelScenarioType.Tag = "";
-            this.labelScenarioType.Text = "Type";
-            // 
-            // textBoxScenarioType
-            // 
-            this.textBoxScenarioType.Location = new System.Drawing.Point(28, 104);
-            this.textBoxScenarioType.Name = "textBoxScenarioType";
-            this.textBoxScenarioType.ReadOnly = true;
-            this.textBoxScenarioType.Size = new System.Drawing.Size(216, 20);
-            this.textBoxScenarioType.TabIndex = 10;
-            // 
-            // listBoxScenarioFlags
-            // 
-            this.listBoxScenarioFlags.FormattingEnabled = true;
-            this.listBoxScenarioFlags.Location = new System.Drawing.Point(28, 183);
-            this.listBoxScenarioFlags.Name = "listBoxScenarioFlags";
-            this.listBoxScenarioFlags.Size = new System.Drawing.Size(216, 108);
-            this.listBoxScenarioFlags.Sorted = true;
-            this.listBoxScenarioFlags.TabIndex = 11;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(28, 298);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(34, 13);
-            this.label3.TabIndex = 12;
-            this.label3.Text = "Steps";
-            // 
-            // labelScenarioStepName
-            // 
-            this.labelScenarioStepName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelScenarioStepName.Location = new System.Drawing.Point(264, 10);
-            this.labelScenarioStepName.Margin = new System.Windows.Forms.Padding(10);
-            this.labelScenarioStepName.Name = "labelScenarioStepName";
-            this.labelScenarioStepName.Size = new System.Drawing.Size(310, 20);
-            this.labelScenarioStepName.TabIndex = 15;
-            // 
-            // labelScenarioStepId
-            // 
-            this.labelScenarioStepId.AutoSize = true;
-            this.labelScenarioStepId.Location = new System.Drawing.Point(264, 48);
-            this.labelScenarioStepId.Name = "labelScenarioStepId";
-            this.labelScenarioStepId.Size = new System.Drawing.Size(16, 13);
-            this.labelScenarioStepId.TabIndex = 16;
-            this.labelScenarioStepId.Tag = "";
-            this.labelScenarioStepId.Text = "Id";
-            // 
-            // labelScenarioStepIndex
-            // 
-            this.labelScenarioStepIndex.AutoSize = true;
-            this.labelScenarioStepIndex.Location = new System.Drawing.Point(264, 88);
-            this.labelScenarioStepIndex.Name = "labelScenarioStepIndex";
-            this.labelScenarioStepIndex.Size = new System.Drawing.Size(67, 13);
-            this.labelScenarioStepIndex.TabIndex = 19;
-            this.labelScenarioStepIndex.Tag = "";
-            this.labelScenarioStepIndex.Text = "Step number";
-            // 
-            // textBoxScenarioStepIndex
-            // 
-            this.textBoxScenarioStepIndex.Location = new System.Drawing.Point(267, 104);
-            this.textBoxScenarioStepIndex.Name = "textBoxScenarioStepIndex";
-            this.textBoxScenarioStepIndex.ReadOnly = true;
-            this.textBoxScenarioStepIndex.Size = new System.Drawing.Size(157, 20);
-            this.textBoxScenarioStepIndex.TabIndex = 20;
-            // 
-            // textBoxScenarioStepId
-            // 
-            this.textBoxScenarioStepId.Location = new System.Drawing.Point(267, 64);
-            this.textBoxScenarioStepId.Name = "textBoxScenarioStepId";
-            this.textBoxScenarioStepId.ReadOnly = true;
-            this.textBoxScenarioStepId.Size = new System.Drawing.Size(50, 20);
-            this.textBoxScenarioStepId.TabIndex = 21;
-            // 
-            // labelScenarioStepRequiredStepId
-            // 
-            this.labelScenarioStepRequiredStepId.AutoSize = true;
-            this.labelScenarioStepRequiredStepId.Location = new System.Drawing.Point(427, 128);
-            this.labelScenarioStepRequiredStepId.Name = "labelScenarioStepRequiredStepId";
-            this.labelScenarioStepRequiredStepId.Size = new System.Drawing.Size(84, 13);
-            this.labelScenarioStepRequiredStepId.TabIndex = 22;
-            this.labelScenarioStepRequiredStepId.Tag = "";
-            this.labelScenarioStepRequiredStepId.Text = "Required step id";
-            this.labelScenarioStepRequiredStepId.Visible = false;
-            // 
-            // textBoxScenarioStepRequiredStepId
-            // 
-            this.textBoxScenarioStepRequiredStepId.Location = new System.Drawing.Point(430, 144);
-            this.textBoxScenarioStepRequiredStepId.Name = "textBoxScenarioStepRequiredStepId";
-            this.textBoxScenarioStepRequiredStepId.ReadOnly = true;
-            this.textBoxScenarioStepRequiredStepId.Size = new System.Drawing.Size(133, 20);
-            this.textBoxScenarioStepRequiredStepId.TabIndex = 23;
-            this.textBoxScenarioStepRequiredStepId.Visible = false;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(264, 128);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(70, 13);
-            this.label6.TabIndex = 24;
-            this.label6.Tag = "";
-            this.label6.Text = "Quest reward";
-            // 
-            // checkBoxScenarioStepBonusObjective
-            // 
-            this.checkBoxScenarioStepBonusObjective.Enabled = false;
-            this.checkBoxScenarioStepBonusObjective.Location = new System.Drawing.Point(430, 102);
-            this.checkBoxScenarioStepBonusObjective.Name = "checkBoxScenarioStepBonusObjective";
-            this.checkBoxScenarioStepBonusObjective.Size = new System.Drawing.Size(132, 24);
-            this.checkBoxScenarioStepBonusObjective.TabIndex = 26;
-            this.checkBoxScenarioStepBonusObjective.Text = "Is bonus objective";
-            this.checkBoxScenarioStepBonusObjective.UseVisualStyleBackColor = true;
-            this.checkBoxScenarioStepBonusObjective.CheckedChanged += new System.EventHandler(this.checkBoxScenarioStepBonusObjective_CheckedChanged);
-            // 
-            // listBoxScenarioSteps
-            // 
-            this.listBoxScenarioSteps.DisplayMember = "Display";
-            this.listBoxScenarioSteps.FormattingEnabled = true;
-            this.listBoxScenarioSteps.Location = new System.Drawing.Point(28, 314);
-            this.listBoxScenarioSteps.Name = "listBoxScenarioSteps";
-            this.listBoxScenarioSteps.Size = new System.Drawing.Size(216, 173);
-            this.listBoxScenarioSteps.TabIndex = 27;
-            this.listBoxScenarioSteps.ValueMember = "Value";
-            this.listBoxScenarioSteps.SelectedValueChanged += new System.EventHandler(this.listBoxScenarioSteps_SelectedValueChanged);
-            // 
-            // labelScenarioStepDescription
-            // 
-            this.labelScenarioStepDescription.AutoSize = true;
-            this.labelScenarioStepDescription.Location = new System.Drawing.Point(265, 167);
-            this.labelScenarioStepDescription.Name = "labelScenarioStepDescription";
-            this.labelScenarioStepDescription.Size = new System.Drawing.Size(60, 13);
-            this.labelScenarioStepDescription.TabIndex = 28;
-            this.labelScenarioStepDescription.Tag = "";
-            this.labelScenarioStepDescription.Text = "Description";
-            // 
-            // textBoxScenarioStepDescription
-            // 
-            this.textBoxScenarioStepDescription.Location = new System.Drawing.Point(267, 183);
-            this.textBoxScenarioStepDescription.Multiline = true;
-            this.textBoxScenarioStepDescription.Name = "textBoxScenarioStepDescription";
-            this.textBoxScenarioStepDescription.ReadOnly = true;
-            this.textBoxScenarioStepDescription.Size = new System.Drawing.Size(307, 108);
-            this.textBoxScenarioStepDescription.TabIndex = 29;
+            this.textBoxScenarioStepQuestRewardId.Location = new System.Drawing.Point(267, 144);
+            this.textBoxScenarioStepQuestRewardId.Name = "textBoxScenarioStepQuestRewardId";
+            this.textBoxScenarioStepQuestRewardId.ReadOnly = true;
+            this.textBoxScenarioStepQuestRewardId.Size = new System.Drawing.Size(95, 20);
+            this.textBoxScenarioStepQuestRewardId.TabIndex = 32;
             // 
             // linkLabelScenarioStepQuestReward
             // 
@@ -355,146 +265,284 @@
             this.linkLabelScenarioStepQuestReward.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.linkLabelScenarioStepQuestReward.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelScenarioStepQuestReward_LinkClicked);
             // 
-            // textBoxScenarioStepQuestRewardId
+            // textBoxScenarioStepDescription
             // 
-            this.textBoxScenarioStepQuestRewardId.Location = new System.Drawing.Point(267, 144);
-            this.textBoxScenarioStepQuestRewardId.Name = "textBoxScenarioStepQuestRewardId";
-            this.textBoxScenarioStepQuestRewardId.ReadOnly = true;
-            this.textBoxScenarioStepQuestRewardId.Size = new System.Drawing.Size(95, 20);
-            this.textBoxScenarioStepQuestRewardId.TabIndex = 32;
+            this.textBoxScenarioStepDescription.Location = new System.Drawing.Point(267, 183);
+            this.textBoxScenarioStepDescription.Multiline = true;
+            this.textBoxScenarioStepDescription.Name = "textBoxScenarioStepDescription";
+            this.textBoxScenarioStepDescription.ReadOnly = true;
+            this.textBoxScenarioStepDescription.Size = new System.Drawing.Size(307, 108);
+            this.textBoxScenarioStepDescription.TabIndex = 29;
             // 
-            // treeViewScenarioStepCriteriaTrees
+            // labelScenarioStepDescription
             // 
-            this.treeViewScenarioStepCriteriaTrees.Location = new System.Drawing.Point(587, 43);
-            this.treeViewScenarioStepCriteriaTrees.Name = "treeViewScenarioStepCriteriaTrees";
-            this.treeViewScenarioStepCriteriaTrees.Size = new System.Drawing.Size(367, 444);
-            this.treeViewScenarioStepCriteriaTrees.TabIndex = 33;
+            this.labelScenarioStepDescription.AutoSize = true;
+            this.labelScenarioStepDescription.Location = new System.Drawing.Point(265, 167);
+            this.labelScenarioStepDescription.Name = "labelScenarioStepDescription";
+            this.labelScenarioStepDescription.Size = new System.Drawing.Size(60, 13);
+            this.labelScenarioStepDescription.TabIndex = 28;
+            this.labelScenarioStepDescription.Tag = "";
+            this.labelScenarioStepDescription.Text = "Description";
             // 
-            // label4
+            // listBoxScenarioSteps
             // 
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(583, 10);
-            this.label4.Margin = new System.Windows.Forms.Padding(10);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(234, 20);
-            this.label4.TabIndex = 34;
-            this.label4.Text = "Criterias";
+            this.listBoxScenarioSteps.DisplayMember = "Display";
+            this.listBoxScenarioSteps.FormattingEnabled = true;
+            this.listBoxScenarioSteps.Location = new System.Drawing.Point(28, 314);
+            this.listBoxScenarioSteps.Name = "listBoxScenarioSteps";
+            this.listBoxScenarioSteps.Size = new System.Drawing.Size(216, 173);
+            this.listBoxScenarioSteps.TabIndex = 27;
+            this.listBoxScenarioSteps.ValueMember = "Value";
+            this.listBoxScenarioSteps.SelectedValueChanged += new System.EventHandler(this.listBoxScenarioSteps_SelectedValueChanged);
             // 
-            // tableLayoutPanel2
+            // checkBoxScenarioStepBonusObjective
             // 
-            this.tableLayoutPanel2.ColumnCount = 1;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.Controls.Add(this.panel1, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.listBoxScenarios, 0, 1);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 2;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.98425F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 74.01575F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(191, 508);
-            this.tableLayoutPanel2.TabIndex = 0;
+            this.checkBoxScenarioStepBonusObjective.Enabled = false;
+            this.checkBoxScenarioStepBonusObjective.Location = new System.Drawing.Point(430, 102);
+            this.checkBoxScenarioStepBonusObjective.Name = "checkBoxScenarioStepBonusObjective";
+            this.checkBoxScenarioStepBonusObjective.Size = new System.Drawing.Size(132, 24);
+            this.checkBoxScenarioStepBonusObjective.TabIndex = 26;
+            this.checkBoxScenarioStepBonusObjective.Text = "Is bonus objective";
+            this.checkBoxScenarioStepBonusObjective.UseVisualStyleBackColor = true;
+            this.checkBoxScenarioStepBonusObjective.CheckedChanged += new System.EventHandler(this.checkBoxScenarioStepBonusObjective_CheckedChanged);
             // 
-            // listBoxScenarios
+            // label6
             // 
-            this.listBoxScenarios.DisplayMember = "Display";
-            this.listBoxScenarios.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listBoxScenarios.FormattingEnabled = true;
-            this.listBoxScenarios.Location = new System.Drawing.Point(3, 134);
-            this.listBoxScenarios.Name = "listBoxScenarios";
-            this.listBoxScenarios.Size = new System.Drawing.Size(185, 371);
-            this.listBoxScenarios.TabIndex = 2;
-            this.listBoxScenarios.ValueMember = "Value";
-            this.listBoxScenarios.SelectedValueChanged += new System.EventHandler(this.listBox1_SelectedValueChanged);
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(264, 128);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(70, 13);
+            this.label6.TabIndex = 24;
+            this.label6.Tag = "";
+            this.label6.Text = "Quest reward";
             // 
-            // panel1
+            // textBoxScenarioStepRequiredStepId
             // 
-            this.panel1.Controls.Add(this.textBoxSearchScenarios);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.comboBoxScenariosSearchBy);
-            this.panel1.Controls.Add(this.buttonSearchScenarios);
-            this.panel1.Location = new System.Drawing.Point(3, 3);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(185, 122);
-            this.panel1.TabIndex = 1;
+            this.textBoxScenarioStepRequiredStepId.Location = new System.Drawing.Point(430, 144);
+            this.textBoxScenarioStepRequiredStepId.Name = "textBoxScenarioStepRequiredStepId";
+            this.textBoxScenarioStepRequiredStepId.ReadOnly = true;
+            this.textBoxScenarioStepRequiredStepId.Size = new System.Drawing.Size(133, 20);
+            this.textBoxScenarioStepRequiredStepId.TabIndex = 23;
+            this.textBoxScenarioStepRequiredStepId.Visible = false;
             // 
-            // buttonSearchScenarios
+            // labelScenarioStepRequiredStepId
             // 
-            this.buttonSearchScenarios.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.buttonSearchScenarios.Location = new System.Drawing.Point(7, 90);
-            this.buttonSearchScenarios.Name = "buttonSearchScenarios";
-            this.buttonSearchScenarios.Size = new System.Drawing.Size(175, 23);
-            this.buttonSearchScenarios.TabIndex = 0;
-            this.buttonSearchScenarios.Text = "Search";
-            this.buttonSearchScenarios.UseVisualStyleBackColor = true;
-            this.buttonSearchScenarios.Click += new System.EventHandler(this.buttonSearchScenarios_Click);
+            this.labelScenarioStepRequiredStepId.AutoSize = true;
+            this.labelScenarioStepRequiredStepId.Location = new System.Drawing.Point(427, 128);
+            this.labelScenarioStepRequiredStepId.Name = "labelScenarioStepRequiredStepId";
+            this.labelScenarioStepRequiredStepId.Size = new System.Drawing.Size(84, 13);
+            this.labelScenarioStepRequiredStepId.TabIndex = 22;
+            this.labelScenarioStepRequiredStepId.Tag = "";
+            this.labelScenarioStepRequiredStepId.Text = "Required step id";
+            this.labelScenarioStepRequiredStepId.Visible = false;
             // 
-            // comboBoxScenariosSearchBy
+            // textBoxScenarioStepId
             // 
-            this.comboBoxScenariosSearchBy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxScenariosSearchBy.FormattingEnabled = true;
-            this.comboBoxScenariosSearchBy.Location = new System.Drawing.Point(7, 20);
-            this.comboBoxScenariosSearchBy.Name = "comboBoxScenariosSearchBy";
-            this.comboBoxScenariosSearchBy.Size = new System.Drawing.Size(175, 21);
-            this.comboBoxScenariosSearchBy.TabIndex = 1;
-            this.comboBoxScenariosSearchBy.Tag = "Search by";
-            this.comboBoxScenariosSearchBy.SelectedValueChanged += new System.EventHandler(this.scenarioSearchBy_SelectedValueChanged);
+            this.textBoxScenarioStepId.Location = new System.Drawing.Point(267, 64);
+            this.textBoxScenarioStepId.Name = "textBoxScenarioStepId";
+            this.textBoxScenarioStepId.ReadOnly = true;
+            this.textBoxScenarioStepId.Size = new System.Drawing.Size(50, 20);
+            this.textBoxScenarioStepId.TabIndex = 21;
             // 
-            // label1
+            // textBoxScenarioStepIndex
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(4, 4);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(55, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Search by";
+            this.textBoxScenarioStepIndex.Location = new System.Drawing.Point(267, 104);
+            this.textBoxScenarioStepIndex.Name = "textBoxScenarioStepIndex";
+            this.textBoxScenarioStepIndex.ReadOnly = true;
+            this.textBoxScenarioStepIndex.Size = new System.Drawing.Size(157, 20);
+            this.textBoxScenarioStepIndex.TabIndex = 20;
             // 
-            // label2
+            // labelScenarioStepIndex
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(4, 44);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(56, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Search for";
+            this.labelScenarioStepIndex.AutoSize = true;
+            this.labelScenarioStepIndex.Location = new System.Drawing.Point(264, 88);
+            this.labelScenarioStepIndex.Name = "labelScenarioStepIndex";
+            this.labelScenarioStepIndex.Size = new System.Drawing.Size(67, 13);
+            this.labelScenarioStepIndex.TabIndex = 19;
+            this.labelScenarioStepIndex.Tag = "";
+            this.labelScenarioStepIndex.Text = "Step number";
             // 
-            // textBoxSearchScenarios
+            // labelScenarioStepId
             // 
-            this.textBoxSearchScenarios.Location = new System.Drawing.Point(7, 61);
-            this.textBoxSearchScenarios.Name = "textBoxSearchScenarios";
-            this.textBoxSearchScenarios.Size = new System.Drawing.Size(175, 20);
-            this.textBoxSearchScenarios.TabIndex = 4;
-            this.textBoxSearchScenarios.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxSearchScenarios_KeyDown);
+            this.labelScenarioStepId.AutoSize = true;
+            this.labelScenarioStepId.Location = new System.Drawing.Point(264, 48);
+            this.labelScenarioStepId.Name = "labelScenarioStepId";
+            this.labelScenarioStepId.Size = new System.Drawing.Size(16, 13);
+            this.labelScenarioStepId.TabIndex = 16;
+            this.labelScenarioStepId.Tag = "";
+            this.labelScenarioStepId.Text = "Id";
+            // 
+            // labelScenarioStepName
+            // 
+            this.labelScenarioStepName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelScenarioStepName.Location = new System.Drawing.Point(264, 10);
+            this.labelScenarioStepName.Margin = new System.Windows.Forms.Padding(10);
+            this.labelScenarioStepName.Name = "labelScenarioStepName";
+            this.labelScenarioStepName.Size = new System.Drawing.Size(310, 20);
+            this.labelScenarioStepName.TabIndex = 15;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(28, 298);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(34, 13);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "Steps";
+            // 
+            // listBoxScenarioFlags
+            // 
+            this.listBoxScenarioFlags.FormattingEnabled = true;
+            this.listBoxScenarioFlags.Location = new System.Drawing.Point(28, 183);
+            this.listBoxScenarioFlags.Name = "listBoxScenarioFlags";
+            this.listBoxScenarioFlags.Size = new System.Drawing.Size(216, 108);
+            this.listBoxScenarioFlags.Sorted = true;
+            this.listBoxScenarioFlags.TabIndex = 11;
+            // 
+            // textBoxScenarioType
+            // 
+            this.textBoxScenarioType.Location = new System.Drawing.Point(28, 104);
+            this.textBoxScenarioType.Name = "textBoxScenarioType";
+            this.textBoxScenarioType.ReadOnly = true;
+            this.textBoxScenarioType.Size = new System.Drawing.Size(216, 20);
+            this.textBoxScenarioType.TabIndex = 10;
+            // 
+            // labelScenarioType
+            // 
+            this.labelScenarioType.AutoSize = true;
+            this.labelScenarioType.Location = new System.Drawing.Point(25, 87);
+            this.labelScenarioType.Name = "labelScenarioType";
+            this.labelScenarioType.Size = new System.Drawing.Size(31, 13);
+            this.labelScenarioType.TabIndex = 9;
+            this.labelScenarioType.Tag = "";
+            this.labelScenarioType.Text = "Type";
+            // 
+            // labelScenarioFlags
+            // 
+            this.labelScenarioFlags.AutoSize = true;
+            this.labelScenarioFlags.Location = new System.Drawing.Point(25, 167);
+            this.labelScenarioFlags.Name = "labelScenarioFlags";
+            this.labelScenarioFlags.Size = new System.Drawing.Size(32, 13);
+            this.labelScenarioFlags.TabIndex = 7;
+            this.labelScenarioFlags.Tag = "";
+            this.labelScenarioFlags.Text = "Flags";
+            // 
+            // textBoxScenarioData
+            // 
+            this.textBoxScenarioData.Location = new System.Drawing.Point(28, 144);
+            this.textBoxScenarioData.Name = "textBoxScenarioData";
+            this.textBoxScenarioData.ReadOnly = true;
+            this.textBoxScenarioData.Size = new System.Drawing.Size(216, 20);
+            this.textBoxScenarioData.TabIndex = 6;
+            // 
+            // labelScenarioData
+            // 
+            this.labelScenarioData.AutoSize = true;
+            this.labelScenarioData.Location = new System.Drawing.Point(25, 127);
+            this.labelScenarioData.Name = "labelScenarioData";
+            this.labelScenarioData.Size = new System.Drawing.Size(30, 13);
+            this.labelScenarioData.TabIndex = 5;
+            this.labelScenarioData.Tag = "";
+            this.labelScenarioData.Text = "Data";
+            // 
+            // textBoxScenarioId
+            // 
+            this.textBoxScenarioId.Location = new System.Drawing.Point(28, 64);
+            this.textBoxScenarioId.Name = "textBoxScenarioId";
+            this.textBoxScenarioId.ReadOnly = true;
+            this.textBoxScenarioId.Size = new System.Drawing.Size(50, 20);
+            this.textBoxScenarioId.TabIndex = 4;
+            // 
+            // labelScenarioId
+            // 
+            this.labelScenarioId.AutoSize = true;
+            this.labelScenarioId.Location = new System.Drawing.Point(25, 47);
+            this.labelScenarioId.Name = "labelScenarioId";
+            this.labelScenarioId.Size = new System.Drawing.Size(16, 13);
+            this.labelScenarioId.TabIndex = 3;
+            this.labelScenarioId.Tag = "";
+            this.labelScenarioId.Text = "Id";
+            // 
+            // labelScenarioName
+            // 
+            this.labelScenarioName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelScenarioName.Location = new System.Drawing.Point(10, 10);
+            this.labelScenarioName.Margin = new System.Windows.Forms.Padding(10);
+            this.labelScenarioName.Name = "labelScenarioName";
+            this.labelScenarioName.Size = new System.Drawing.Size(234, 20);
+            this.labelScenarioName.TabIndex = 2;
+            this.labelScenarioName.Text = "Scenario name";
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.scenarios);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            this.tabControl1.Location = new System.Drawing.Point(0, 24);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1201, 546);
+            this.tabControl1.Size = new System.Drawing.Size(1201, 522);
             this.tabControl1.TabIndex = 1;
             this.tabControl1.Enter += new System.EventHandler(this.tabControl1_Enter);
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.optionsToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1201, 24);
+            this.menuStrip1.TabIndex = 2;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // optionsToolStripMenuItem
+            // 
+            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.optionsToolStripMenuItem.Text = "Options";
+            this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 524);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(1201, 22);
+            this.statusStrip1.TabIndex = 3;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(39, 17);
+            this.toolStripStatusLabel1.Text = "Ready";
+            this.toolStripStatusLabel1.TextChanged += new System.EventHandler(this.toolStripStatusLabel1_TextChanged);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1201, 546);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.Text = "MainForm";
             this.scenarios.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.tabControl1.ResumeLayout(false);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -538,5 +586,9 @@
         private System.Windows.Forms.Label labelScenarioId;
         private System.Windows.Forms.Label labelScenarioName;
         private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
     }
 }

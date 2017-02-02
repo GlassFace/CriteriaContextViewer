@@ -29,7 +29,7 @@ namespace CriteriaContextViewer.Model.Files
 
         public string Display => $"{Id} - {Name}";
 
-        public void ReadObject(IWowClientDBReader dbReader, BinaryReader reader)
+        public void ReadObject(IWowClientDBReader dbReader, BinaryReader reader, IDBCDataProvider dbcDataProvider)
         {
             using (BinaryReader br = reader)
             {

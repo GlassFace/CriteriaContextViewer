@@ -46,8 +46,11 @@
     <Compile Include="ExtensionMethods.cs" />
     <Compile Include="Files\Criteria.cs" />
     <Compile Include="Files\CriteriaTree.cs" />
+    <Compile Include="Files\DungeonEncounter.cs" />
+    <Compile Include="Files\Item.cs" />
     <Compile Include="Files\ScenarioStep.cs" />
     <Compile Include="Files\Scenario.cs" />
+    <Compile Include="IDBCDataProvider.cs" />
     <Compile Include="IDBObjectInstantiator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="NYIAttribute.cs" />
