@@ -43,9 +43,9 @@ namespace CriteriaContextViewer.Model.Files
                 case CriteriaTreeOperator.All:
                     return $"CT {Id} - All of the following criterias are met";
                 case CriteriaTreeOperator.SumChildren:
-                    return $"CT {Id} - The following criterias are met at least {Amount} time" + (Amount > 1 ? "s" : "");
+                    return $"CT {Id} - The following criterias are met {Amount} time" + (Amount > 1 ? "s" : "");
                 case CriteriaTreeOperator.MaxChild:
-                    return $"CT {Id} - Any of the following criterias are met at least {Amount} time" + (Amount > 1 ? "s" : "");
+                    return $"CT {Id} - Any of the following criterias are met {Amount} time" + (Amount > 1 ? "s" : "");
                 case CriteriaTreeOperator.CountDirectChildren:
                     return $"CT {Id} - At least {Amount} of the following criterias are met at least once";
                 case CriteriaTreeOperator.Any:
