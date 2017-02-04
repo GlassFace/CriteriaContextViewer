@@ -10,5 +10,6 @@ namespace CriteriaContextViewer
     {
         public bool UseDungeonEncounter { get; set; }
         public bool UseItems { get; set; }
+        public bool VerboseCriteriaTree { get; set; }
     }
 }

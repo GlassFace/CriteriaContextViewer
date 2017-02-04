@@ -189,9 +189,9 @@ namespace CriteriaContextViewer.Forms
 
         public void LoadItems()
         {
-            toolStripStatusLabel1.Text = "Loading Item-sparse.db2...";
-            toolStripStatusLabel1.Invalidate();
-            statusStrip1.Update();
+            LoadDBCObject<Item>(typeof(Item), Item.FileName)
+                .ToList()
+                .ForEach(_dbcDataStore.Add);
         }
 
         private XmlElement GetDefinition(string dbcName, string dbcNameWithExt)
@@ -218,7 +218,7 @@ namespace CriteriaContextViewer.Forms
             if (ProgramSettings.UseItems)
                 LoadItems();
         }
-        
+
         private void listBox1_SelectedValueChanged(object sender, EventArgs e)
         {
             Scenario scenario = (Scenario) listBoxScenarios.SelectedItem;
@@ -265,49 +265,14 @@ namespace CriteriaContextViewer.Forms
             textBoxScenarioStepRequiredStepId.Text = step.BonusObjectiveRequiredStepId.ToString();
             checkBoxScenarioStepBonusObjective.Checked = (step.Flags & ScenarioStepFlag.BonusObjective) != 0;
             treeViewScenarioStepCriteriaTrees.Nodes.Clear();
-            TreeNode node = GetCriteriaTreeNodesFromScenarioStep(step);
-            if (node != null)
+            if (step.CriteriaTree != null)
             {
-                treeViewScenarioStepCriteriaTrees.Nodes.Add(node);
+                treeViewScenarioStepCriteriaTrees.Nodes.AddRange(
+                    step.CriteriaTree.GetChildrenTreeNodes(ProgramSettings.VerboseCriteriaTree).ToArray());
                 treeViewScenarioStepCriteriaTrees.ExpandAll();
             }
         }
-
-        private TreeNode GetCriteriaTreeNodesFromScenarioStep(ScenarioStep step)
-        {
-            CriteriaTree criteriaTree = step.CriteriaTree;
-            if (criteriaTree == null)
-                return null;
-            
-            TreeNode root = new TreeNode(criteriaTree.ToString());
-            GetCriteriaTreeChildrenTreeNodes(ref root, criteriaTree);
-            return root;
-        }
-
-        private void GetCriteriaTreeChildrenTreeNodes(ref TreeNode root, CriteriaTree criteriaTree)
-        {
-            if (criteriaTree.Criteria != null)
-            {
-                root.Nodes.Add(new TreeNode(criteriaTree.Criteria.ToString()));
-            }
-            else
-            {
-                foreach (var child in criteriaTree.Children)
-                {
-                    if ((child.Operator == CriteriaTreeOperator.Single && child.Parent != null && child.Parent.Operator == CriteriaTreeOperator.SumChildren) || (child.Operator == CriteriaTreeOperator.Single && child.Amount == 1 && criteriaTree.Operator != CriteriaTreeOperator.SumChildrenWeight))
-                    {
-                        root.Nodes.Add(new TreeNode(child.Criteria.ToString()));
-                    }
-                    else
-                    {
-                        TreeNode node = new TreeNode(child.ToString());
-                        GetCriteriaTreeChildrenTreeNodes(ref node, child);
-                        root.Nodes.Add(node);
-                    }
-                }
-            }
-        }
-
+        
         private void buttonSearchScenarios_Click(object sender, EventArgs e)
         {
             ScenarioSearchType searchType = (ScenarioSearchType) comboBoxScenariosSearchBy.SelectedItem;
@@ -562,7 +527,8 @@ namespace CriteriaContextViewer.Forms
             OptionsModel optionsModel = new OptionsModel
             {
                 UseDungeonEncounter = ProgramSettings.UseDungeonEncounters,
-                UseItems = ProgramSettings.UseItems
+                UseItems = ProgramSettings.UseItems,
+                VerboseCriteriaTree = ProgramSettings.VerboseCriteriaTree
             };
             OptionsForm optionsForm = new OptionsForm(ref optionsModel);
             optionsForm.ShowDialog();
@@ -573,6 +539,9 @@ namespace CriteriaContextViewer.Forms
 
             if (optionsModel.UseItems != ProgramSettings.UseItems)
                 ProgramSettings.UseItems = optionsModel.UseItems;
+
+            if (optionsModel.VerboseCriteriaTree != ProgramSettings.VerboseCriteriaTree)
+                ProgramSettings.VerboseCriteriaTree = optionsModel.VerboseCriteriaTree;
         }
 
         public void UpdateDBCFiles(OptionsModel options)
@@ -586,19 +555,6 @@ namespace CriteriaContextViewer.Forms
                 LoadItems();
             else if (!options.UseItems & _dbcDataStore.Items.Any())
                 _dbcDataStore.Items.Clear();
-        }
-
-        private void toolStripStatusLabel1_TextChanged(object sender, EventArgs e)
-        {
-            if (toolStripStatusLabel1.Text == "Loading Item-sparse.db2...")
-            {
-                LoadDBCObject<Item>(typeof(Item), Item.FileName)
-                    .ToList()
-                    .ForEach(_dbcDataStore.Add);
-                toolStripStatusLabel1.Text = "Ready";
-                toolStripStatusLabel1.Invalidate();
-                statusStrip1.Update();
-            }
         }
     }
 

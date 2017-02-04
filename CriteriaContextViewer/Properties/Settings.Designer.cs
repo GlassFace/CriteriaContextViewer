@@ -46,5 +46,17 @@ namespace CriteriaContextViewer.Properties {
                 this["UseItems"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool VerboseCriteriaTree {
+            get {
+                return ((bool)(this["VerboseCriteriaTree"]));
+            }
+            set {
+                this["VerboseCriteriaTree"] = value;
+            }
+        }
     }
 }

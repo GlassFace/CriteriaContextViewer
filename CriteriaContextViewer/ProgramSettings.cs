@@ -33,5 +33,15 @@ namespace CriteriaContextViewer
                 Properties.Settings.Default.Save();
             }
         }
+
+        public static bool VerboseCriteriaTree
+        {
+            get { return Properties.Settings.Default.VerboseCriteriaTree; }
+            set
+            {
+                Properties.Settings.Default.VerboseCriteriaTree = value;
+                Properties.Settings.Default.Save();
+            }
+        }
     }
 }

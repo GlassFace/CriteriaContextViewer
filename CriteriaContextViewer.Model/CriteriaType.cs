@@ -565,5 +565,29 @@ namespace CriteriaContextViewer.Model
 
         [Description("Own heirlooms")]
         OwnHeirlooms                        = 189,
+
+        [Description("Artifact power earned")]
+        ArtifactPowerEarned                 = 190,
+
+        [Description("Artifact traits unlocked")]
+        ArtifactTraitsUnlocked              = 191,
+
+        [Description("Reached honor level")]
+        HonorLevelReached                   = 194,
+        
+        [Description("Reached prestige")]
+        PrestigeReached                     = 195,
+        
+        [Description("Order Hall talent learned")]
+        OrderHallTalentLearned              = 198,
+
+        [Description("Appearance unlocked by slot")]
+        AppearanceUnlockedBySlot            = 199,
+
+        [Description("Order Hall recruit troop")]
+        OrderHallRecruitTroop               = 200,
+
+        [Description("Complete world quest")]
+        CompleteWorldQuest                  = 203,
     }
 }

@@ -21,11 +21,6 @@ namespace CriteriaContextViewer.Forms
             InitializeComponent();
         }
 
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             Options.UseDungeonEncounter = checkBox1.Checked;
@@ -40,6 +35,12 @@ namespace CriteriaContextViewer.Forms
         {
             checkBox1.Checked = Options.UseDungeonEncounter;
             checkBox2.Checked = Options.UseItems;
+            checkBoxVerboseCriteriaTree.Checked = Options.VerboseCriteriaTree;
+        }
+
+        private void checkBoxVerboseCriteriaTree_CheckedChanged(object sender, EventArgs e)
+        {
+            Options.VerboseCriteriaTree = checkBoxVerboseCriteriaTree.Checked;
         }
     }
 }

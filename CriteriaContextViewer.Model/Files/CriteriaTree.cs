@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using CriteriaContextViewer.Model.Readers;
 
 namespace CriteriaContextViewer.Model.Files
@@ -30,37 +31,189 @@ namespace CriteriaContextViewer.Model.Files
             Children = new List<CriteriaTree>();
         }
 
-        public override string ToString()
+        public IEnumerable<TreeNode> GetChildrenTreeNodes(bool verbose)
         {
+            if (verbose)
+                return GetVerboseChildrenTreeNodes();
+
+            if (Parent == null && Operator == CriteriaTreeOperator.All)
+                return Children.SelectMany(child => child.GetChildrenTreeNodes(verbose));
+            
+            if (Criteria != null)
+            {
+                if (Amount > 1 && !(Parent != null && Parent.Operator == CriteriaTreeOperator.SumChildren))
+                {
+                    TreeNode node = new TreeNode(Criteria.ToString(verbose, this));
+                    node.Tag = Criteria;
+
+                    TreeNode nodeParent = new TreeNode(ToString(verbose), new [] {node});
+                    nodeParent.Tag = this;
+                    return new List<TreeNode> {nodeParent};
+                }
+                else
+                {
+                    TreeNode node = new TreeNode(Criteria.ToString(verbose, this));
+                    node.Tag = Criteria;
+                    return new List<TreeNode> {node};
+                }
+            }
+
+            if ((Operator == CriteriaTreeOperator.All || Operator == CriteriaTreeOperator.Any) && Children.Count == 1 &&
+                Children[0].Criteria != null)
+            {
+                TreeNode node = new TreeNode(Children[0].Criteria.ToString(verbose, Children[0]));
+                node.Tag = Children[0].Criteria;
+                return new List<TreeNode> {node};
+            }
+
+            TreeNode parent = new TreeNode(ToString(verbose));
+            parent.Tag = this;
+            foreach (var child in Children)
+            {
+                if (Operator == CriteriaTreeOperator.SumChildrenWeight && child.Operator == CriteriaTreeOperator.Single &&
+                    child.Criteria != null)
+                {
+                    TreeNode node = new TreeNode(child.Criteria.ToString(verbose, child));
+                    node.Tag = child.Criteria;
+                    parent.Nodes.Add(node);
+                }
+                else
+                    parent.Nodes.AddRange(child.GetChildrenTreeNodes(verbose).ToArray());
+            }
+
+            return new List<TreeNode> {parent};
+        }
+
+        private IEnumerable<TreeNode> GetVerboseChildrenTreeNodes()
+        {
+            if (Criteria != null)
+            {
+                if (Amount > 1 && !(Parent != null && Parent.Operator == CriteriaTreeOperator.SumChildren))
+                {
+                    TreeNode node = new TreeNode(Criteria.ToString(true, this));
+                    node.Tag = Criteria;
+
+                    TreeNode nodeParent = new TreeNode(ToString(true), new[] { node });
+                    nodeParent.Tag = this;
+                    return new List<TreeNode> { nodeParent };
+                }
+                else
+                {
+                    TreeNode node = new TreeNode(Criteria.ToString(true, this));
+                    node.Tag = Criteria;
+                    return new List<TreeNode> { node };
+                }
+            }
+
+            TreeNode parent = new TreeNode(ToString(true));
+            parent.Tag = this;
+            parent.Nodes.AddRange(Children.SelectMany(child => child.GetVerboseChildrenTreeNodes()).ToArray());
+            return new List<TreeNode> {parent};
+        }
+
+        //public IEnumerable<TreeNode> GetChildrenTreeNodes(bool verbose)
+        //{
+        //    if (Criteria != null)
+        //    {
+        //        TreeNode node = new TreeNode(Criteria.ToString(verbose, this));
+        //        node.Tag = Criteria;
+        //        return new List<TreeNode> {node};
+        //    }
+
+        //    TreeNode parent = new TreeNode(ToString(verbose));
+        //    parent.Tag = this;
+        //    List<TreeNode> children = new List<TreeNode>();
+        //    foreach (var child in Children)
+        //    {
+        //        if (Operator == CriteriaTreeOperator.SumChildrenWeight)
+        //        {
+        //            children.AddRange(child.GetChildrenTreeNodes(verbose).ToArray());
+        //        }
+        //        else
+        //        {
+        //            if (child.Criteria != null)
+        //            {
+        //                TreeNode node;
+        //                if (child.Operator == CriteriaTreeOperator.Single && child.Amount > 1)
+        //                {
+        //                    node = new TreeNode(child.ToString(verbose));
+        //                    node.Tag = child;
+        //                    node.Nodes.Add(child.Criteria.ToString(verbose, child));
+        //                }
+        //                else
+        //                {
+        //                    node = new TreeNode(child.Criteria.ToString(verbose, child));
+        //                    node.Tag = child.Criteria;
+        //                }
+
+        //                if (Operator == CriteriaTreeOperator.Any && child.Operator == CriteriaTreeOperator.All)
+        //                    parent.Nodes.Add(node);
+        //                else
+        //                    children.Add(node);
+        //            }
+        //            else if (Operator == CriteriaTreeOperator.All || (Parent != null && Parent.Operator == CriteriaTreeOperator.SumChildrenWeight))
+        //            {
+        //                TreeNode node = new TreeNode(child.ToString(verbose));
+        //                node.Tag = child;
+        //                node.Nodes.AddRange(child.GetChildrenTreeNodes(verbose).ToArray());
+        //                children.Add(node);
+        //            }
+        //            else
+        //            {
+        //                parent.Nodes.AddRange(child.GetChildrenTreeNodes(verbose).ToArray());
+        //            }
+        //        }
+        //    }
+
+        //    if (parent.GetNodeCount(false) > 0 || (Operator == CriteriaTreeOperator.SumChildrenWeight && Parent == null))
+        //    {
+        //        parent.Nodes.AddRange(children.ToArray());
+        //        return new List<TreeNode> {parent};
+        //    }
+
+        //    return children;
+        //}
+
+        public string ToString(bool verbose)
+        {
+            string description = "";
             switch (Operator)
             {
                 case CriteriaTreeOperator.Single:
                     if (Parent.Operator == CriteriaTreeOperator.SumChildrenWeight)
-                        return $"CT {Id} - Increase parent criteria tree progress by {Amount}";
-                    return $"CT {Id} - The following criteria is met" + (Amount > 1 ? $" {Amount} times" : "");
+                        description = $"Increase parent criteria tree progress by {Amount}";
+                    else
+                        description = $"The following criteria is met" + (Amount > 1 ? $" {Amount} times" : "");
+                    break;
                 case CriteriaTreeOperator.SingleNotCompleted:
-                    return $"CT {Id} - The following criteria is not met";
+                    description = $"The following criteria is not met";
+                    break;
                 case CriteriaTreeOperator.All:
-                    return $"CT {Id} - All of the following criterias are met";
+                    description = $"All of the following criterias are met";
+                    break;
                 case CriteriaTreeOperator.SumChildren:
-                    return $"CT {Id} - The following criterias are met {Amount} time" + (Amount > 1 ? "s" : "");
+                    description = $"The following criterias are met {Amount} time" + (Amount > 1 ? "s" : "");
+                    break;
                 case CriteriaTreeOperator.MaxChild:
-                    return $"CT {Id} - Any of the following criterias are met {Amount} time" + (Amount > 1 ? "s" : "");
+                    description = $"Any of the following criterias are met {Amount} time" + (Amount > 1 ? "s" : "");
+                    break;
                 case CriteriaTreeOperator.CountDirectChildren:
-                    return $"CT {Id} - At least {Amount} of the following criterias are met at least once";
+                    description = $"At least {Amount} of the following criterias are met at least once";
+                    break;
                 case CriteriaTreeOperator.Any:
-                    return $"CT {Id} - At least {Amount} criteria" + (Amount > 1 ? "s" : "") + " are met";
+                    description = $"At least {Amount} criteria" + (Amount > 1 ? "s are" : " is") + " met";
+                    break;
                 case CriteriaTreeOperator.SumChildrenWeight:
-                    return $"CT {Id} - Criteria tree progress is more than {Amount}";
+                    description = $"Progress is more than {Amount}";
+                    break;
             }
 
-            string description = $"CT {Id}";
-            if (!string.IsNullOrEmpty(Description))
-                description = $"{description} - {Description}";
+            if (verbose)
+                description = $"CT {Id} - {description}";
 
             return description;
         }
-
+        
         public void ReadObject(IWowClientDBReader dbReader, BinaryReader reader, IDBCDataProvider dbcDataProvider)
         {
             using (BinaryReader br = reader)

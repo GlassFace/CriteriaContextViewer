@@ -29,7 +29,7 @@ namespace CriteriaContextViewer.Model.Files
 
         private IDBCDataProvider _dbcDataProvider;
         
-        public override string ToString()
+        public string ToString(bool verbose, CriteriaTree parent)
         {
             string text = "";
             switch (Type)
@@ -95,7 +95,12 @@ namespace CriteriaContextViewer.Model.Files
                     ? $" - (Unknown criteria type: \"{Type}\", data: {Asset})"
                     : $" - Unspecified criteria type \"{Enum.GetName(typeof(CriteriaType), Type)}\", data: {Asset}";
 
-            text = $"C {Id} - {text}";
+            if (verbose)
+                text = $"C {Id} - {text}";
+
+            if (parent.Parent != null && parent.Parent.Operator == CriteriaTreeOperator.SumChildrenWeight)
+                text = $"{text}, progress {parent.Amount}";
+
             if (Type.NotYetImplemented())
                 text += " (NYI)";
 
