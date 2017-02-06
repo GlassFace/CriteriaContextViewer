@@ -5,6 +5,6 @@ namespace CriteriaContextViewer.Model
 {
     public interface IDBObjectReader
     {
-        void ReadObject(IWowClientDBReader dbReader, BinaryReader reader, IDBCDataProvider dbcDataProvider);
+        void ReadObject(IWowClientDBReader dbReader, BinaryReader reader, IDBCDataProvider dbcDataProvider, IDBDataProvider dbDataProvider);
     }
 }

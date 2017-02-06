@@ -15,5 +15,6 @@ namespace CriteriaContextViewer
         ScenarioStep GetScenarioStep(uint id);
         DungeonEncounter GetDungeonEncounter(uint id);
         Item GetItem(uint id);
+        Spell GetSpell(uint id);
     }
 }

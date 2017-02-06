@@ -47,12 +47,14 @@
     <Compile Include="BinaryReaderExtensions.cs" />
     <Compile Include="CriteriaType.cs" />
     <Compile Include="ExtensionMethods.cs" />
+    <Compile Include="Files\Spell.cs" />
     <Compile Include="Files\Criteria.cs" />
     <Compile Include="Files\CriteriaTree.cs" />
     <Compile Include="Files\DungeonEncounter.cs" />
     <Compile Include="Files\Item.cs" />
     <Compile Include="Files\ScenarioStep.cs" />
     <Compile Include="Files\Scenario.cs" />
+    <Compile Include="IDBDataProvider.cs" />
     <Compile Include="IDBCDataProvider.cs" />
     <Compile Include="IDBObjectInstantiator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

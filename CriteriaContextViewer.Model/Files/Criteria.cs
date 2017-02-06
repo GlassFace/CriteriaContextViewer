@@ -28,6 +28,7 @@ namespace CriteriaContextViewer.Model.Files
         public string AssetCustomValue { get; set; }
 
         private IDBCDataProvider _dbcDataProvider;
+        private IDBDataProvider _dbDataProvider;
         
         public string ToString(bool verbose, CriteriaTree parent)
         {
@@ -35,17 +36,33 @@ namespace CriteriaContextViewer.Model.Files
             switch (Type)
             {
                 case CriteriaType.KillCreature:
-                    text = $"Kill creature with entry \"{Asset}\"";
+                    string name = _dbDataProvider.GetCreatureName(Asset);
+                    if (!string.IsNullOrEmpty(name))
+                        text = $"Kill \"{name}\" (entry: {Asset})";
+                    else
+                        text = $"Kill creature with entry \"{Asset}\"";
                     break;
                 case CriteriaType.ManuallyGivenCriteria:
                     text = $"Get manually granted the criteria (id: {Id})";
                     break;
                 case CriteriaType.BeSpellTarget:
-                    text = $"Be target of spell (id: {Asset})";
+                {
+                    Spell spell = _dbcDataProvider.GetSpell(Asset);
+                    if (!string.IsNullOrEmpty(spell?.Name))
+                        text = $"Be target of spell \"{spell.Name}\" (id: {Asset})";
+                    else
+                        text = $"Be target of spell (id: {Asset})";
                     break;
+                }
                 case CriteriaType.CastSpell:
-                    text = $"Cast spell (id: {Asset})";
-                    break;
+                {
+                    Spell spell = _dbcDataProvider.GetSpell(Asset);
+                    if (!string.IsNullOrEmpty(spell?.Name))
+                        text = $"Cast spell \"{spell.Name}\" (id: {Asset})";
+                    else
+                        text = $"Cast spell (id: {Asset})";
+                        break;
+                }
                 case CriteriaType.DefeatCreatureGroup:
                     text = $"Defeat creature group (id: {Asset})";
                     break;
@@ -56,8 +73,14 @@ namespace CriteriaContextViewer.Model.Files
                     text = $"Event \"{Asset}\" is sent to scenario";
                     break;
                 case CriteriaType.CastSpell2:
-                    text = $"Hit a target with spell (id: {Asset})";
+                {
+                    Spell spell = _dbcDataProvider.GetSpell(Asset);
+                    if (!string.IsNullOrEmpty(spell?.Name))
+                        text = $"Hit a target with spell \"{spell.Name}\" (id: {Asset})";
+                    else
+                        text = $"Hit a target with spell (id: {Asset})";
                     break;
+                }
                 case CriteriaType.LootItem:
                 {
                     Item item = _dbcDataProvider.GetItem(Asset);
@@ -86,6 +109,9 @@ namespace CriteriaContextViewer.Model.Files
                     else
                         text = $"Complete dungeon encounter \"{Asset}\"";
                     break;
+                case CriteriaType.UseGameobject:
+                    text = $"Use gameobject with id \"{Asset}\"";
+                    break;
                 default:
                     break;
             }
@@ -107,9 +133,10 @@ namespace CriteriaContextViewer.Model.Files
             return text;
         }
 
-        public void ReadObject(IWowClientDBReader dbReader, BinaryReader binaryReader, IDBCDataProvider dbcDataProvider)
+        public void ReadObject(IWowClientDBReader dbReader, BinaryReader binaryReader, IDBCDataProvider dbcDataProvider, IDBDataProvider dbDataProvider)
         {
             _dbcDataProvider = dbcDataProvider;
+            _dbDataProvider = dbDataProvider;
 
             using (BinaryReader br = binaryReader)
             {

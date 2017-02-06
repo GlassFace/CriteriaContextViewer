@@ -58,5 +58,101 @@ namespace CriteriaContextViewer.Properties {
                 this["VerboseCriteriaTree"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("trinity")]
+        public string DBUsername {
+            get {
+                return ((string)(this["DBUsername"]));
+            }
+            set {
+                this["DBUsername"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("trinity")]
+        public string DBPassword {
+            get {
+                return ((string)(this["DBPassword"]));
+            }
+            set {
+                this["DBPassword"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("world")]
+        public string DBDatabase {
+            get {
+                return ((string)(this["DBDatabase"]));
+            }
+            set {
+                this["DBDatabase"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("localhost")]
+        public string DBServer {
+            get {
+                return ((string)(this["DBServer"]));
+            }
+            set {
+                this["DBServer"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("3306")]
+        public string DBPort {
+            get {
+                return ((string)(this["DBPort"]));
+            }
+            set {
+                this["DBPort"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool UseCreatureNames {
+            get {
+                return ((bool)(this["UseCreatureNames"]));
+            }
+            set {
+                this["UseCreatureNames"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool UseGameobjectNames {
+            get {
+                return ((bool)(this["UseGameobjectNames"]));
+            }
+            set {
+                this["UseGameobjectNames"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool UseSpells {
+            get {
+                return ((bool)(this["UseSpells"]));
+            }
+            set {
+                this["UseSpells"] = value;
+            }
+        }
     }
 }

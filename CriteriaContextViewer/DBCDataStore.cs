@@ -15,6 +15,7 @@ namespace CriteriaContextViewer
         public Dictionary<uint, ScenarioStep> ScenarioSteps { get; set; }
         public Dictionary<uint, DungeonEncounter> DungeonEncounters { get; set; }
         public Dictionary<uint, Item> Items { get; set; }
+        public Dictionary<uint, Spell> Spells { get; set; }
 
         public DBCDataStore()
         {
@@ -24,6 +25,7 @@ namespace CriteriaContextViewer
             ScenarioSteps = new Dictionary<uint, ScenarioStep>();
             DungeonEncounters = new Dictionary<uint, DungeonEncounter>();
             Items = new Dictionary<uint, Item>();
+            Spells = new Dictionary<uint, Spell>();
         }
 
         public void Add(Criteria criteria)
@@ -74,11 +76,20 @@ namespace CriteriaContextViewer
             Items.Add(item.Id, item);
         }
 
+        public void Add(Spell spell)
+        {
+            if (Spells.ContainsKey(spell.Id))
+                return;
+
+            Spells.Add(spell.Id, spell);
+        }
+
         public Criteria GetCriteria(uint id) => Criterias.ContainsKey(id) ? Criterias[id] : null;
         public CriteriaTree GetCriteriaTree(uint id) => CriteriaTrees.ContainsKey(id) ? CriteriaTrees[id] : null;
         public Scenario GetScenario(uint id) => Scenarios.ContainsKey(id) ? Scenarios[id] : null;
         public ScenarioStep GetScenarioStep(uint id) => ScenarioSteps.ContainsKey(id) ? ScenarioSteps[id] : null;
         public DungeonEncounter GetDungeonEncounter(uint id) => DungeonEncounters.ContainsKey(id) ? DungeonEncounters[id] : null;
         public Item GetItem(uint id) => Items.ContainsKey(id) ? Items[id] : null;
+        public Spell GetSpell(uint id) => Spells.ContainsKey(id) ? Spells[id] : null;
     }
 }

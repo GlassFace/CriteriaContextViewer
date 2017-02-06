@@ -214,7 +214,7 @@ namespace CriteriaContextViewer.Model.Files
             return description;
         }
         
-        public void ReadObject(IWowClientDBReader dbReader, BinaryReader reader, IDBCDataProvider dbcDataProvider)
+        public void ReadObject(IWowClientDBReader dbReader, BinaryReader reader, IDBCDataProvider dbcDataProvider, IDBDataProvider dbDataProvider)
         {
             using (BinaryReader br = reader)
             {

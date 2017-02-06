@@ -87,7 +87,7 @@ namespace CriteriaContextViewer.Model.Files
             SocketColor = new byte[3];
         }
 
-        public void ReadObject(IWowClientDBReader dbReader, BinaryReader reader, IDBCDataProvider dbcDataProvider)
+        public void ReadObject(IWowClientDBReader dbReader, BinaryReader reader, IDBCDataProvider dbcDataProvider, IDBDataProvider dbDataProvider)
         {
             Id = reader.ReadUInt32();
             for (int i = 0; i < 3; i++)

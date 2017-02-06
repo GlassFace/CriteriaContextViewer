@@ -36,11 +36,38 @@ namespace CriteriaContextViewer.Forms
             checkBox1.Checked = Options.UseDungeonEncounter;
             checkBox2.Checked = Options.UseItems;
             checkBoxVerboseCriteriaTree.Checked = Options.VerboseCriteriaTree;
+            checkBoxUseCreatureNames.Checked = Options.UseCreatureNames;
+            checkBoxUseGameobjectNames.Checked = Options.UseGameobjectNames;
+            checkBoxUseSpells.Checked = Options.UseSpells;
         }
 
         private void checkBoxVerboseCriteriaTree_CheckedChanged(object sender, EventArgs e)
         {
             Options.VerboseCriteriaTree = checkBoxVerboseCriteriaTree.Checked;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DBSettingsModel dbSettingsModel = new DBSettingsModel();
+            DatabaseDetailsForm databaseDetailsForm = new DatabaseDetailsForm(ref dbSettingsModel);
+            databaseDetailsForm.ShowDialog();
+
+            Options.DBSettingsModel = dbSettingsModel;
+        }
+
+        private void checkBoxUseCreatureNames_CheckedChanged(object sender, EventArgs e)
+        {
+            Options.UseCreatureNames = checkBoxUseCreatureNames.Checked;
+        }
+
+        private void checkBoxGameobjectNames_CheckedChanged(object sender, EventArgs e)
+        {
+            Options.UseGameobjectNames = checkBoxUseGameobjectNames.Checked;
+        }
+
+        private void checkBoxUseSpells_CheckedChanged(object sender, EventArgs e)
+        {
+            Options.UseSpells = checkBoxUseSpells.Checked;
         }
     }
 }

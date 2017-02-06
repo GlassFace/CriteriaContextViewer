@@ -25,6 +25,7 @@ namespace CriteriaContextViewer.Forms
         private readonly XmlDocument _mDefinitions;
         private const string DbcLayoutFileName = @"dbclayout.xml";
         private DBCDataStore _dbcDataStore;
+        private DBDataStore _dbDataStore;
 
         private Dictionary<uint, Scenario> Scenarios => _dbcDataStore.Scenarios;
 
@@ -35,6 +36,7 @@ namespace CriteriaContextViewer.Forms
         public string CriteriaTreeFilePath => Path.Combine(AssemblyUtils.ExecutingAssemblyPath, CriteriaTree.FileName);
         public string DungeonEncounterFilePath => Path.Combine(AssemblyUtils.ExecutingAssemblyPath, DungeonEncounter.FileName);
         public string ItemFilePath => Path.Combine(AssemblyUtils.ExecutingAssemblyPath, Item.FileName);
+        public string SpellFilePath => Path.Combine(AssemblyUtils.ExecutingAssemblyPath, Item.FileName);
 
         public MainForm()
         {
@@ -43,6 +45,7 @@ namespace CriteriaContextViewer.Forms
             _mDefinitions = new XmlDocument();
 
             _dbcDataStore = new DBCDataStore();
+            _dbDataStore = new DBDataStore();
 
             IEnumerable<string> missingFiles = GetMissingFiles();
             if (missingFiles.Any())
@@ -82,6 +85,9 @@ namespace CriteriaContextViewer.Forms
             if (ProgramSettings.UseItems && !File.Exists(ItemFilePath))
                 missingFiles.Add(Path.GetFileName(ItemFilePath));
 
+            if (ProgramSettings.UseSpells && !File.Exists(SpellFilePath))
+                missingFiles.Add(Path.GetFileName(SpellFilePath));
+
             return missingFiles;
         }
 
@@ -109,7 +115,7 @@ namespace CriteriaContextViewer.Forms
             foreach (var row in dbReader.Rows)
             {
                 T t = new T();
-                t.ReadObject(dbReader, row, _dbcDataStore);
+                t.ReadObject(dbReader, row, _dbcDataStore, _dbDataStore);
                 objects.Add(t);
             }
 
@@ -194,6 +200,13 @@ namespace CriteriaContextViewer.Forms
                 .ForEach(_dbcDataStore.Add);
         }
 
+        public void LoadSpells()
+        {
+            LoadDBCObject<Spell>(typeof(Spell), Spell.FileName)
+                .ToList()
+                .ForEach(_dbcDataStore.Add);
+        }
+
         private XmlElement GetDefinition(string dbcName, string dbcNameWithExt)
         {
             XmlNodeList definitions = _mDefinitions["DBFilesClient"].GetElementsByTagName(dbcName);
@@ -217,6 +230,8 @@ namespace CriteriaContextViewer.Forms
                 LoadDungeonEncounters();
             if (ProgramSettings.UseItems)
                 LoadItems();
+            if (ProgramSettings.UseSpells)
+                LoadSpells();
         }
 
         private void listBox1_SelectedValueChanged(object sender, EventArgs e)
@@ -532,7 +547,6 @@ namespace CriteriaContextViewer.Forms
             };
             OptionsForm optionsForm = new OptionsForm(ref optionsModel);
             optionsForm.ShowDialog();
-            UpdateDBCFiles(optionsModel);
 
             if (optionsModel.UseDungeonEncounter != ProgramSettings.UseDungeonEncounters)
                 ProgramSettings.UseDungeonEncounters = optionsModel.UseDungeonEncounter;
@@ -540,21 +554,43 @@ namespace CriteriaContextViewer.Forms
             if (optionsModel.UseItems != ProgramSettings.UseItems)
                 ProgramSettings.UseItems = optionsModel.UseItems;
 
+            if (optionsModel.UseSpells != ProgramSettings.UseSpells)
+                ProgramSettings.UseSpells = optionsModel.UseSpells;
+
             if (optionsModel.VerboseCriteriaTree != ProgramSettings.VerboseCriteriaTree)
                 ProgramSettings.VerboseCriteriaTree = optionsModel.VerboseCriteriaTree;
+
+            if (optionsModel.UseCreatureNames != ProgramSettings.UseCreatureNames)
+                ProgramSettings.UseCreatureNames = optionsModel.UseCreatureNames;
+
+            UpdateDBCFiles();
+            UpdateDBData();
         }
 
-        public void UpdateDBCFiles(OptionsModel options)
+        public void UpdateDBCFiles()
         {
-            if (options.UseDungeonEncounter && !_dbcDataStore.DungeonEncounters.Any())
+            if (ProgramSettings.UseDungeonEncounters && !_dbcDataStore.DungeonEncounters.Any())
                 LoadDungeonEncounters();
-            else if (!options.UseDungeonEncounter && _dbcDataStore.DungeonEncounters.Any())
+            else if (!ProgramSettings.UseDungeonEncounters && _dbcDataStore.DungeonEncounters.Any())
                 _dbcDataStore.DungeonEncounters.Clear();
 
-            if (options.UseItems && !_dbcDataStore.Items.Any())
+            if (ProgramSettings.UseItems && !_dbcDataStore.Items.Any())
                 LoadItems();
-            else if (!options.UseItems & _dbcDataStore.Items.Any())
+            else if (!ProgramSettings.UseItems && _dbcDataStore.Items.Any())
                 _dbcDataStore.Items.Clear();
+
+            if (ProgramSettings.UseSpells && !_dbcDataStore.Spells.Any())
+                LoadSpells();
+            else if (!ProgramSettings.UseSpells && _dbcDataStore.Spells.Any())
+                _dbcDataStore.Spells.Clear();
+        }
+
+        public void UpdateDBData()
+        {
+            if (!ProgramSettings.UseCreatureNames && _dbDataStore.CreatureNames.Any())
+                _dbDataStore.CreatureNames.Clear();
+            else if (ProgramSettings.UseCreatureNames && !_dbDataStore.CreatureNames.Any())
+                _dbDataStore.LoadCreatureNames();
         }
     }
 

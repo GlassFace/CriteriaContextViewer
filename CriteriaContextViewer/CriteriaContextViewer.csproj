@@ -87,6 +87,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DBDataStore.cs" />
+    <Compile Include="DBSettingsModel.cs" />
+    <Compile Include="Forms\DatabaseDetailsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DatabaseDetailsForm.Designer.cs">
+      <DependentUpon>DatabaseDetailsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ProgramSettings.cs" />
     <Compile Include="Controls\CriteriaTreeControl.cs">
       <SubType>UserControl</SubType>
@@ -112,6 +120,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Controls\CriteriaTreeControl.resx">
       <DependentUpon>CriteriaTreeControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DatabaseDetailsForm.resx">
+      <DependentUpon>DatabaseDetailsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
