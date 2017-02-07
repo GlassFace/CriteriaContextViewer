@@ -563,6 +563,24 @@ namespace CriteriaContextViewer.Forms
             if (optionsModel.UseCreatureNames != ProgramSettings.UseCreatureNames)
                 ProgramSettings.UseCreatureNames = optionsModel.UseCreatureNames;
 
+            if (optionsModel.UseGameobjectNames != ProgramSettings.UseGameobjectNames)
+                ProgramSettings.UseGameobjectNames = optionsModel.UseGameobjectNames;
+
+            if (optionsModel.DBSettingsModel.Username != ProgramSettings.DBUsername)
+                ProgramSettings.DBUsername = optionsModel.DBSettingsModel.Username;
+
+            if (optionsModel.DBSettingsModel.Password != ProgramSettings.DBPassword)
+                ProgramSettings.DBPassword = optionsModel.DBSettingsModel.Password;
+
+            if (optionsModel.DBSettingsModel.Database != ProgramSettings.DBDatabase)
+                ProgramSettings.DBDatabase = optionsModel.DBSettingsModel.Database;
+
+            if (optionsModel.DBSettingsModel.Server != ProgramSettings.DBServer)
+                ProgramSettings.DBServer = optionsModel.DBSettingsModel.Server;
+
+            if (optionsModel.DBSettingsModel.Port != ProgramSettings.DBPort)
+                ProgramSettings.DBPort = optionsModel.DBSettingsModel.Port;
+
             UpdateDBCFiles();
             UpdateDBData();
         }
@@ -591,6 +609,11 @@ namespace CriteriaContextViewer.Forms
                 _dbDataStore.CreatureNames.Clear();
             else if (ProgramSettings.UseCreatureNames && !_dbDataStore.CreatureNames.Any())
                 _dbDataStore.LoadCreatureNames();
+
+            if (!ProgramSettings.UseGameobjectNames && _dbDataStore.GameobjectNames.Any())
+                _dbDataStore.GameobjectNames.Clear();
+            else if (ProgramSettings.UseGameobjectNames && !_dbDataStore.GameobjectNames.Any())
+                _dbDataStore.LoadGameobjectNames();
         }
     }
 

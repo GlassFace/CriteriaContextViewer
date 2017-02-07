@@ -26,11 +26,12 @@ namespace CriteriaContextViewer
         public DBDataStore()
         {
             CreatureNames = new Dictionary<uint, Tuple<string, string>>();
+            GameobjectNames = new Dictionary<uint, string>();
         }
 
         public string GetCreatureName(uint entry)
         {
-            return CreatureNames.ContainsKey(entry) ? string.IsNullOrEmpty(CreatureNames[entry].Item1) ? CreatureNames[entry].Item2 ?? string.Empty : string.Empty : string.Empty;
+            return CreatureNames.ContainsKey(entry) ? string.IsNullOrEmpty(CreatureNames[entry].Item1) ? CreatureNames[entry].Item2 ?? string.Empty : CreatureNames[entry].Item1 : string.Empty;
         }
 
         public void LoadCreatureNames()
