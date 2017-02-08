@@ -534,53 +534,14 @@ namespace CriteriaContextViewer.Forms
         
         private void linkLabelScenarioStepQuestReward_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start(WowheadUtils.GetWowheadURLForQuest(int.Parse(textBoxScenarioStepQuestRewardId.Text)));
+            Process.Start(WowheadUtils.GetWowheadURLForQuest(uint.Parse(textBoxScenarioStepQuestRewardId.Text)));
         }
 
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OptionsModel optionsModel = new OptionsModel
-            {
-                UseDungeonEncounter = ProgramSettings.UseDungeonEncounters,
-                UseItems = ProgramSettings.UseItems,
-                VerboseCriteriaTree = ProgramSettings.VerboseCriteriaTree
-            };
-            OptionsForm optionsForm = new OptionsForm(ref optionsModel);
+            OptionsForm optionsForm = new OptionsForm();
             optionsForm.ShowDialog();
-
-            if (optionsModel.UseDungeonEncounter != ProgramSettings.UseDungeonEncounters)
-                ProgramSettings.UseDungeonEncounters = optionsModel.UseDungeonEncounter;
-
-            if (optionsModel.UseItems != ProgramSettings.UseItems)
-                ProgramSettings.UseItems = optionsModel.UseItems;
-
-            if (optionsModel.UseSpells != ProgramSettings.UseSpells)
-                ProgramSettings.UseSpells = optionsModel.UseSpells;
-
-            if (optionsModel.VerboseCriteriaTree != ProgramSettings.VerboseCriteriaTree)
-                ProgramSettings.VerboseCriteriaTree = optionsModel.VerboseCriteriaTree;
-
-            if (optionsModel.UseCreatureNames != ProgramSettings.UseCreatureNames)
-                ProgramSettings.UseCreatureNames = optionsModel.UseCreatureNames;
-
-            if (optionsModel.UseGameobjectNames != ProgramSettings.UseGameobjectNames)
-                ProgramSettings.UseGameobjectNames = optionsModel.UseGameobjectNames;
-
-            if (optionsModel.DBSettingsModel.Username != ProgramSettings.DBUsername)
-                ProgramSettings.DBUsername = optionsModel.DBSettingsModel.Username;
-
-            if (optionsModel.DBSettingsModel.Password != ProgramSettings.DBPassword)
-                ProgramSettings.DBPassword = optionsModel.DBSettingsModel.Password;
-
-            if (optionsModel.DBSettingsModel.Database != ProgramSettings.DBDatabase)
-                ProgramSettings.DBDatabase = optionsModel.DBSettingsModel.Database;
-
-            if (optionsModel.DBSettingsModel.Server != ProgramSettings.DBServer)
-                ProgramSettings.DBServer = optionsModel.DBSettingsModel.Server;
-
-            if (optionsModel.DBSettingsModel.Port != ProgramSettings.DBPort)
-                ProgramSettings.DBPort = optionsModel.DBSettingsModel.Port;
-
+            
             UpdateDBCFiles();
             UpdateDBData();
         }
@@ -614,6 +575,44 @@ namespace CriteriaContextViewer.Forms
                 _dbDataStore.GameobjectNames.Clear();
             else if (ProgramSettings.UseGameobjectNames && !_dbDataStore.GameobjectNames.Any())
                 _dbDataStore.LoadGameobjectNames();
+        }
+
+        private void treeViewScenarioStepCriteriaTrees_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (!ProgramSettings.CriteriaTreeClickTriggersWowhead)
+                return;
+
+            TreeNode node = e.Node;
+            if (node == null)
+                return;
+
+            Criteria criteria = node.Tag as Criteria;
+            if (criteria == null)
+                return;
+
+            switch (criteria.Type)
+            {
+                case CriteriaType.KillCreature:
+                    Process.Start(WowheadUtils.GetWowheadURLForCreature(criteria.Asset));
+                    break;
+                case CriteriaType.CastSpell:
+                case CriteriaType.CastSpell2:
+                case CriteriaType.BeSpellTarget:
+                case CriteriaType.BeSpellTarget2:
+                    Process.Start(WowheadUtils.GetWowheadURLForSpell(criteria.Asset));
+                    break;
+                case CriteriaType.LootItem:
+                case CriteriaType.OwnItem:
+                    Process.Start(WowheadUtils.GetWowheadURLForItem(criteria.Asset));
+                    break;
+                case CriteriaType.UseGameobject:
+                case CriteriaType.SurveyGameobject:
+                case CriteriaType.FishInGameobject:
+                    Process.Start(WowheadUtils.GetWowheadURLForGameobject(criteria.Asset));
+                    break;
+                default:
+                    break;
+            }
         }
     }
 

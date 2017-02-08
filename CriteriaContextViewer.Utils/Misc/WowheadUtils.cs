@@ -34,19 +34,25 @@ namespace CriteriaContextViewer.Utils.Misc
             return $"{domain}.wowhead.com";
         }
 
-        public static string GetWowheadDataSectionUrl(WowheadDataSection section, int value) => Path.Combine(GetWowheadURL(), $"{section.ToString().ToLower()}={value}");
+        public static string GetWowheadDataSectionUrl(WowheadDataSection section, uint value) => Path.Combine(GetWowheadURL(), $"{section.ToString().ToLower()}={value}");
 
-        public static string GetWowheadURLForSpell(int spellId)
+        public static string GetWowheadURLForSpell(uint spellId)
             => GetWowheadDataSectionUrl(WowheadDataSection.Spell, spellId);
 
-        public static string GetWowheadURLForCreature(int creatureId)
+        public static string GetWowheadURLForCreature(uint creatureId)
             => GetWowheadDataSectionUrl(WowheadDataSection.Creature, creatureId);
 
-        public static string GetWowheadURLForQuest(int questId)
+        public static string GetWowheadURLForQuest(uint questId)
             => GetWowheadDataSectionUrl(WowheadDataSection.Quest, questId);
 
-        public static string GetWowheadURLForAchievement(int achievementId)
+        public static string GetWowheadURLForAchievement(uint achievementId)
             => GetWowheadDataSectionUrl(WowheadDataSection.Achievement, achievementId);
+
+        public static string GetWowheadURLForItem(uint itemId)
+            => GetWowheadDataSectionUrl(WowheadDataSection.Item, itemId);
+
+        public static string GetWowheadURLForGameobject(uint gameobjectId)
+            => GetWowheadDataSectionUrl(WowheadDataSection.Gameobject, gameobjectId);
     }
 
     public enum WowheadDataSection
@@ -54,6 +60,8 @@ namespace CriteriaContextViewer.Utils.Misc
         Spell,
         Creature,
         Quest,
-        Achievement
+        Achievement,
+        Item,
+        Gameobject
     }
 }

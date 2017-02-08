@@ -29,15 +29,16 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.checkBoxUseSpells = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.checkBoxVerboseCriteriaTree = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.checkBoxUseCreatureNames = new System.Windows.Forms.CheckBox();
             this.checkBoxUseGameobjectNames = new System.Windows.Forms.CheckBox();
-            this.checkBoxUseSpells = new System.Windows.Forms.CheckBox();
+            this.checkBoxUseCreatureNames = new System.Windows.Forms.CheckBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.checkBoxCriteriaTreeviewWowhead = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -56,6 +57,17 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Optional DBC files";
+            // 
+            // checkBoxUseSpells
+            // 
+            this.checkBoxUseSpells.AutoSize = true;
+            this.checkBoxUseSpells.Location = new System.Drawing.Point(13, 88);
+            this.checkBoxUseSpells.Name = "checkBoxUseSpells";
+            this.checkBoxUseSpells.Size = new System.Drawing.Size(70, 17);
+            this.checkBoxUseSpells.TabIndex = 3;
+            this.checkBoxUseSpells.Text = "Spell.db2";
+            this.checkBoxUseSpells.UseVisualStyleBackColor = true;
+            this.checkBoxUseSpells.CheckedChanged += new System.EventHandler(this.checkBoxUseSpells_CheckedChanged);
             // 
             // checkBox2
             // 
@@ -96,10 +108,11 @@
             // 
             this.groupBox2.AutoSize = true;
             this.groupBox2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.groupBox2.Controls.Add(this.checkBoxCriteriaTreeviewWowhead);
             this.groupBox2.Controls.Add(this.checkBoxVerboseCriteriaTree);
             this.groupBox2.Location = new System.Drawing.Point(12, 149);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(151, 69);
+            this.groupBox2.Size = new System.Drawing.Size(151, 142);
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Misc";
@@ -116,15 +129,17 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Database data";
             // 
-            // button1
+            // checkBoxUseGameobjectNames
             // 
-            this.button1.Location = new System.Drawing.Point(313, 6);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(105, 23);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "Database Details";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.checkBoxUseGameobjectNames.AutoSize = true;
+            this.checkBoxUseGameobjectNames.Location = new System.Drawing.Point(13, 49);
+            this.checkBoxUseGameobjectNames.Margin = new System.Windows.Forms.Padding(10);
+            this.checkBoxUseGameobjectNames.Name = "checkBoxUseGameobjectNames";
+            this.checkBoxUseGameobjectNames.Size = new System.Drawing.Size(117, 17);
+            this.checkBoxUseGameobjectNames.TabIndex = 7;
+            this.checkBoxUseGameobjectNames.Text = "Gameobject names";
+            this.checkBoxUseGameobjectNames.UseVisualStyleBackColor = true;
+            this.checkBoxUseGameobjectNames.CheckedChanged += new System.EventHandler(this.checkBoxGameobjectNames_CheckedChanged);
             // 
             // checkBoxUseCreatureNames
             // 
@@ -138,34 +153,32 @@
             this.checkBoxUseCreatureNames.UseVisualStyleBackColor = true;
             this.checkBoxUseCreatureNames.CheckedChanged += new System.EventHandler(this.checkBoxUseCreatureNames_CheckedChanged);
             // 
-            // checkBoxUseGameobjectNames
+            // button1
             // 
-            this.checkBoxUseGameobjectNames.AutoSize = true;
-            this.checkBoxUseGameobjectNames.Location = new System.Drawing.Point(13, 49);
-            this.checkBoxUseGameobjectNames.Margin = new System.Windows.Forms.Padding(10);
-            this.checkBoxUseGameobjectNames.Name = "checkBoxUseGameobjectNames";
-            this.checkBoxUseGameobjectNames.Size = new System.Drawing.Size(117, 17);
-            this.checkBoxUseGameobjectNames.TabIndex = 7;
-            this.checkBoxUseGameobjectNames.Text = "Gameobject names";
-            this.checkBoxUseGameobjectNames.UseVisualStyleBackColor = true;
-            this.checkBoxUseGameobjectNames.CheckedChanged += new System.EventHandler(this.checkBoxGameobjectNames_CheckedChanged);
+            this.button1.Location = new System.Drawing.Point(313, 6);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(105, 23);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "Database Details";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // checkBoxUseSpells
+            // checkBoxCriteriaTreeviewWowhead
             // 
-            this.checkBoxUseSpells.AutoSize = true;
-            this.checkBoxUseSpells.Location = new System.Drawing.Point(13, 88);
-            this.checkBoxUseSpells.Name = "checkBoxUseSpells";
-            this.checkBoxUseSpells.Size = new System.Drawing.Size(70, 17);
-            this.checkBoxUseSpells.TabIndex = 3;
-            this.checkBoxUseSpells.Text = "Spell.db2";
-            this.checkBoxUseSpells.UseVisualStyleBackColor = true;
-            this.checkBoxUseSpells.CheckedChanged += new System.EventHandler(this.checkBoxUseSpells_CheckedChanged);
+            this.checkBoxCriteriaTreeviewWowhead.Location = new System.Drawing.Point(13, 60);
+            this.checkBoxCriteriaTreeviewWowhead.Margin = new System.Windows.Forms.Padding(10);
+            this.checkBoxCriteriaTreeviewWowhead.Name = "checkBoxCriteriaTreeviewWowhead";
+            this.checkBoxCriteriaTreeviewWowhead.Size = new System.Drawing.Size(125, 56);
+            this.checkBoxCriteriaTreeviewWowhead.TabIndex = 4;
+            this.checkBoxCriteriaTreeviewWowhead.Text = "Criteria treeview double-click opens wowhead";
+            this.checkBoxCriteriaTreeviewWowhead.UseVisualStyleBackColor = true;
+            this.checkBoxCriteriaTreeviewWowhead.CheckedChanged += new System.EventHandler(this.checkBoxCriteriaTreeviewWowhead_CheckedChanged);
             // 
             // OptionsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(430, 263);
+            this.ClientSize = new System.Drawing.Size(430, 284);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -197,5 +210,6 @@
         private System.Windows.Forms.CheckBox checkBoxUseCreatureNames;
         private System.Windows.Forms.CheckBox checkBoxUseGameobjectNames;
         private System.Windows.Forms.CheckBox checkBoxUseSpells;
+        private System.Windows.Forms.CheckBox checkBoxCriteriaTreeviewWowhead;
     }
 }

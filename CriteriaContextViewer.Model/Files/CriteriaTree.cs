@@ -110,70 +110,7 @@ namespace CriteriaContextViewer.Model.Files
             parent.Nodes.AddRange(Children.SelectMany(child => child.GetVerboseChildrenTreeNodes()).ToArray());
             return new List<TreeNode> {parent};
         }
-
-        //public IEnumerable<TreeNode> GetChildrenTreeNodes(bool verbose)
-        //{
-        //    if (Criteria != null)
-        //    {
-        //        TreeNode node = new TreeNode(Criteria.ToString(verbose, this));
-        //        node.Tag = Criteria;
-        //        return new List<TreeNode> {node};
-        //    }
-
-        //    TreeNode parent = new TreeNode(ToString(verbose));
-        //    parent.Tag = this;
-        //    List<TreeNode> children = new List<TreeNode>();
-        //    foreach (var child in Children)
-        //    {
-        //        if (Operator == CriteriaTreeOperator.SumChildrenWeight)
-        //        {
-        //            children.AddRange(child.GetChildrenTreeNodes(verbose).ToArray());
-        //        }
-        //        else
-        //        {
-        //            if (child.Criteria != null)
-        //            {
-        //                TreeNode node;
-        //                if (child.Operator == CriteriaTreeOperator.Single && child.Amount > 1)
-        //                {
-        //                    node = new TreeNode(child.ToString(verbose));
-        //                    node.Tag = child;
-        //                    node.Nodes.Add(child.Criteria.ToString(verbose, child));
-        //                }
-        //                else
-        //                {
-        //                    node = new TreeNode(child.Criteria.ToString(verbose, child));
-        //                    node.Tag = child.Criteria;
-        //                }
-
-        //                if (Operator == CriteriaTreeOperator.Any && child.Operator == CriteriaTreeOperator.All)
-        //                    parent.Nodes.Add(node);
-        //                else
-        //                    children.Add(node);
-        //            }
-        //            else if (Operator == CriteriaTreeOperator.All || (Parent != null && Parent.Operator == CriteriaTreeOperator.SumChildrenWeight))
-        //            {
-        //                TreeNode node = new TreeNode(child.ToString(verbose));
-        //                node.Tag = child;
-        //                node.Nodes.AddRange(child.GetChildrenTreeNodes(verbose).ToArray());
-        //                children.Add(node);
-        //            }
-        //            else
-        //            {
-        //                parent.Nodes.AddRange(child.GetChildrenTreeNodes(verbose).ToArray());
-        //            }
-        //        }
-        //    }
-
-        //    if (parent.GetNodeCount(false) > 0 || (Operator == CriteriaTreeOperator.SumChildrenWeight && Parent == null))
-        //    {
-        //        parent.Nodes.AddRange(children.ToArray());
-        //        return new List<TreeNode> {parent};
-        //    }
-
-        //    return children;
-        //}
-
+        
         public string ToString(bool verbose)
         {
             string description = "";

@@ -154,5 +154,17 @@ namespace CriteriaContextViewer.Properties {
                 this["UseSpells"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool CriteriaTreeClickTriggersWowhead {
+            get {
+                return ((bool)(this["CriteriaTreeClickTriggersWowhead"]));
+            }
+            set {
+                this["CriteriaTreeClickTriggersWowhead"] = value;
+            }
+        }
     }
 }

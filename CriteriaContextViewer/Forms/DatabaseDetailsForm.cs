@@ -12,12 +12,9 @@ namespace CriteriaContextViewer.Forms
 {
     public partial class DatabaseDetailsForm : Form
     {
-        public DBSettingsModel DBSettingsModel { get; set; }
-
-        public DatabaseDetailsForm(ref DBSettingsModel dbSettingsModel)
+        public DatabaseDetailsForm()
         {
             InitializeComponent();
-            DBSettingsModel = dbSettingsModel;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -27,20 +24,21 @@ namespace CriteriaContextViewer.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            DBSettingsModel.Username = textBox1.Text;
-            DBSettingsModel.Password = textBox2.Text;
-            DBSettingsModel.Database = textBox3.Text;
-            DBSettingsModel.Server = textBox4.Text;
-            DBSettingsModel.Port = textBox5.Text;
+            ProgramSettings.DBUsername = textBox1.Text;
+            ProgramSettings.DBPassword = textBox2.Text;
+            ProgramSettings.DBDatabase = textBox3.Text;
+            ProgramSettings.DBServer = textBox4.Text;
+            ProgramSettings.DBPort = textBox5.Text;
+            Close();
         }
 
         private void DatabaseDetailsForm_Load(object sender, EventArgs e)
         {
-            textBox1.Text = DBSettingsModel.Username;
-            textBox2.Text = DBSettingsModel.Password;
-            textBox3.Text = DBSettingsModel.Database;
-            textBox4.Text = DBSettingsModel.Server;
-            textBox5.Text = DBSettingsModel.Port;
+            textBox1.Text = ProgramSettings.DBUsername;
+            textBox2.Text = ProgramSettings.DBPassword;
+            textBox3.Text = ProgramSettings.DBDatabase;
+            textBox4.Text = ProgramSettings.DBServer;
+            textBox5.Text = ProgramSettings.DBPort;
         }
     }
 }

@@ -126,5 +126,15 @@ namespace CriteriaContextViewer
                 Properties.Settings.Default.Save();
             }
         }
+
+        public static bool CriteriaTreeClickTriggersWowhead
+        {
+            get { return Properties.Settings.Default.CriteriaTreeClickTriggersWowhead; }
+            set
+            {
+                Properties.Settings.Default.CriteriaTreeClickTriggersWowhead = value;
+                Properties.Settings.Default.Save();
+            }
+        }
     }
 }

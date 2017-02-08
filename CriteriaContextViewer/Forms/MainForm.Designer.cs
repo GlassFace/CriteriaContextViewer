@@ -101,7 +101,7 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 490F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 520F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1177, 520);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
@@ -242,6 +242,7 @@
             this.treeViewScenarioStepCriteriaTrees.Name = "treeViewScenarioStepCriteriaTrees";
             this.treeViewScenarioStepCriteriaTrees.Size = new System.Drawing.Size(367, 444);
             this.treeViewScenarioStepCriteriaTrees.TabIndex = 33;
+            this.treeViewScenarioStepCriteriaTrees.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewScenarioStepCriteriaTrees_NodeMouseDoubleClick);
             // 
             // textBoxScenarioStepQuestRewardId
             // 
@@ -510,7 +511,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "MainForm";
-            this.Text = "MainForm";
+            this.Text = "CriteriaContextViewer";
             this.scenarios.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);

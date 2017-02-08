@@ -36,12 +36,14 @@ namespace CriteriaContextViewer.Model.Files
             switch (Type)
             {
                 case CriteriaType.KillCreature:
+                {
                     string name = _dbDataProvider.GetCreatureName(Asset);
                     if (!string.IsNullOrEmpty(name))
                         text = $"Kill \"{name}\" (entry: {Asset})";
                     else
                         text = $"Kill creature with entry \"{Asset}\"";
                     break;
+                }
                 case CriteriaType.ManuallyGivenCriteria:
                     text = $"Get manually granted the criteria (id: {Id})";
                     break;
@@ -110,8 +112,14 @@ namespace CriteriaContextViewer.Model.Files
                         text = $"Complete dungeon encounter \"{Asset}\"";
                     break;
                 case CriteriaType.UseGameobject:
-                    text = $"Use gameobject with id \"{Asset}\"";
+                {
+                    string name = _dbDataProvider.GetGameobjectName(Asset);
+                    if (!string.IsNullOrEmpty(name))
+                        text = $"Use \"{name}\" (entry: \"{Asset}\")";
+                    else
+                        text = $"Use gameobject with entry \"{Asset}\"";
                     break;
+                }
                 default:
                     break;
             }
